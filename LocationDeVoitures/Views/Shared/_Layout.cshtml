@@ -1,0 +1,121 @@
+﻿@using LocationDeVoitures.Models
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - My ASP.NET Application</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    <link href="@Url.Content("~/Content/bootstrap.min.css")" rel="stylesheet" />
+    <script src="@Url.Content("~/Scripts/jquery-3.5.1.min.js")"></script>
+    <script src="@Url.Content("~/Scripts/gridmvc.min.js")"></script>
+
+
+    <link href="@Url.Content("~/Content/Gridmvc.css")" rel="stylesheet" />
+    <link href="@Url.Content("~/Content/bootstrap.min.css")" rel="stylesheet" />
+    <script src="@Url.Content("~/Scripts/jquery-3.5.1.min.js")"></script>
+    <script src="@Url.Content("~/Scripts/gridmvc.js")"></script>
+
+</head>
+<body>
+    <div class="navbar navbar-expand-sm navbar-dark fixed-top bg-dark">
+        <div class="container">
+            <div class="navbar-header">
+                <button class="navbar-toggler"
+                        type="button"
+                        data-toggle="collapse"
+                        data-target="#navbarSupportedContent"
+                        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                </button>
+                @Html.ActionLink("LocationDeVoitures", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item">@Html.ActionLink("Home", "Index", "Home")</li>
+                    <li class="nav-item">@Html.ActionLink("Voitures", "Index", "Voitures")</li>
+                </ul>
+                @Html.Partial("_LoginPartial")
+            </div>
+
+        </div>
+    </div>
+
+    <main class="d-flex">
+
+        @if (User.Identity.IsAuthenticated)
+        {
+
+            <nav class="col-2 d-md-block navbar-dark bg-dark">
+                <div class="position-sticky pt-3">
+                    <ul class="nav flex-column">
+                        <li class="nav-item">
+                            @Html.ActionLink("Dashboard", "Dashboard", "Manage", routeValues: null, new { @class = "nav-link active" })
+                        </li>
+
+                        @if (User.IsInRole(MesConstants.RoleAdministrateur))
+                        {
+                            <li class="nav-item">
+                                @Html.ActionLink("Historique des client", "Index", "Home", routeValues: null, new { @class = "nav-link active" })
+                            </li>
+                            <li class="nav-item">
+                                @Html.ActionLink("List Des Probleme", "Index", "Problemes", routeValues: null, new { @class = "nav-link active" })
+                            </li>
+                        }
+                        @if (User.IsInRole(MesConstants.RoleAgence))
+                        {
+                            <li class="nav-item">
+                                @Html.ActionLink("Add Voiture", "Create", "Voitures", routeValues: null, new { @class = "nav-link active" })
+                            </li>
+                        }
+                        <li class="nav-item">
+                            @Html.ActionLink("List Favoris", "Index", "ListFavoris", routeValues: null, new { @class = "nav-link active" })
+                        </li>
+                        <li class="nav-item">
+                            @Html.ActionLink("List Noire", "Index", "ListNoire", routeValues: null, new { @class = "nav-link active" })
+                        </li>
+                    </ul>
+                    <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
+                        <span>Profile</span>
+                        <a class="link-secondary" href="#" aria-label="Add a new report">
+                            <span data-feather="plus-circle"></span>
+                        </a>
+                    </h6>
+                    <ul class="nav flex-column mb-2">
+                        <li class="nav-item">
+                            @if (User.IsInRole(MesConstants.RoleAdministrateur))
+                            {
+                                @Html.ActionLink("UpDate Profile", "Edit", "Administrateurs", routeValues: null, new { @class = "nav-link active" })
+                            }
+                            else if (User.IsInRole(MesConstants.RoleAgence))
+                            {
+                                @Html.ActionLink("UpDate Profile", "Edit", "Agences", routeValues: null, new { @class = "nav-link active" })
+                            }
+                            else if (User.IsInRole(MesConstants.RoleLocataire))
+                            {
+                                @Html.ActionLink("UpDate Profile", "Edit", "Locataires", routeValues: null, new { @class = "nav-link active" })
+                            }
+                        </li>
+                        <li class="nav-item">
+                            @Html.ActionLink("Change your password", "ChangePassword", "Manage", routeValues: null, new { @class = "nav-link active" })
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+        }
+        <div class="col-10">
+            @RenderBody()
+            <hr />
+            <footer>
+                <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
+            </footer>
+        </div>
+    </main>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+
+    @section styles{}
+    </body>
+</html>

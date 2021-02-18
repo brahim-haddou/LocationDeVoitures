@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30907.101
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LocationDeVoitures", "LocationDeVoitures\LocationDeVoitures.csproj", "{EE8E9107-A3D8-48AF-AD4B-63D578C51AEF}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{EE8E9107-A3D8-48AF-AD4B-63D578C51AEF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EE8E9107-A3D8-48AF-AD4B-63D578C51AEF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EE8E9107-A3D8-48AF-AD4B-63D578C51AEF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EE8E9107-A3D8-48AF-AD4B-63D578C51AEF}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {5BE5D50E-1062-4B16-AB57-0A9CB19AA2D8}
+	EndGlobalSection
+EndGlobal

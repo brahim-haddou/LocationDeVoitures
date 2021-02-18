@@ -1,0 +1,120 @@
+﻿body {
+    padding-top: 50px;
+    padding-bottom: 20px;
+}
+
+/* Set padding to keep content from hitting the edges */
+.body-content {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+/* Override the default bootstrap behavior where horizontal description lists 
+   will truncate terms that are too long to fit in the left column 
+*/
+.dl-horizontal dt {
+    white-space: normal;
+}
+
+/* Set width on the form input elements since they're 100% wide by default */
+input,
+select,
+textarea {
+    max-width: 280px;
+}
+
+.navbar-nav > li {
+    margin-left: 20px;
+    margin-right: 20px;
+}
+
+.vouture-list {
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap; 
+    margin: 20px;
+}
+
+.vouture-list > li {
+    margin: 20px;
+    padding: 0px;
+    border-radius: 15px;
+    box-shadow: 4px 4px 30px rgba(0,0,0,0.2);
+}
+
+.vouture-image {
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+    overflow: hidden;
+}
+
+.vouture-image > img{
+    object-fit: cover;
+    box-sizing: border-box;
+}
+
+vouture-detial {
+    display: flex;
+    width: 70%;
+    align-items: center;
+}
+
+.vouture-detial-desc {
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 10px;
+    box-sizing: border-box;
+    font-family: Calibri;
+
+}
+
+.vouture-detial-desc > a {
+    font-size: 22px;
+}
+
+.vouture-detial-prix {
+    justify-content: space-between;
+    padding: 0px;
+    box-sizing: border-box;
+    font-family: Calibri;
+    font-size: 18px;
+    border-bottom-left-radius: 15px;
+    border-bottom-right-radius: 15px;
+}
+
+.vouture-detial-prix > p {
+    width: 50%;
+    float: left;
+    color: #ffff;
+    text-align: center;
+}
+
+.vouture-list-top {
+    display: flex;
+    margin: 20px;
+}
+.vouture-list-top > H3 {
+    margin: 0px 20px 20px 20px;
+    width: 50%;
+    float: left;
+    text-align: left;
+}
+.vouture-list-top > form {
+    margin: 20px;
+    width: 50%;
+    float: right;
+}
+
+
+-detail
+.vouture-image-detail {
+    border-radius: 15px;
+    overflow: hidden;
+}
+
+.vouture-image-detail > img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    box-sizing: border-box;
+}

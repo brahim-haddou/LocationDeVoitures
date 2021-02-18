@@ -1,0 +1,53 @@
+﻿@model IEnumerable<LocationDeVoitures.Models.Agence>
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<table class="table">
+    <tr>
+        <th>
+            Nom
+        </th>
+        <th>
+            CodeAgence
+        </th>
+        <th>
+            Address
+        </th>
+        <th>
+            Ville
+        </th>
+        <th>
+            Tel
+        </th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Nom)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CodeAgence)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Address)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Ville)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Tel)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", "Agences", new { id = item.AgenceID }, null) |
+                @Html.ActionLink("Details", "Details", "Agences", new { id = item.AgenceID }, null) |
+                @Html.ActionLink("Delete", "Delete", "Agences", new { id = item.AgenceID }, null)
+            </td>
+        </tr>
+    }
+
+</table>

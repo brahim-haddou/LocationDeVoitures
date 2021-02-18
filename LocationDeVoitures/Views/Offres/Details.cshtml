@@ -1,0 +1,50 @@
+﻿@model LocationDeVoitures.Models.Offre
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Offre</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.VoitureOffre.Matricule)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.VoitureOffre.Matricule)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Pourcentage)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Pourcentage)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Data)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Data)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Duree)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Duree)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.OffreID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

@@ -1,0 +1,54 @@
+﻿@model LocationDeVoitures.Models.Locataire
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+
+<table class="table">
+    <tr>
+        <th>
+            Nom
+        </th>
+        <th>
+            Prenom
+        </th>
+        <th>
+            CIN
+        </th>
+        <th>
+            Address
+        </th>
+        <th>
+            Ville
+        </th>
+    </tr>
+
+    @foreach (var item in Model.LocataireList)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Nom)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Prenom)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CIN)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Address)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Ville)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", "Locataires", new { id = item.LocataireID }, null) |
+                @Html.ActionLink("Details", "Details", "Locataires", new { id = item.LocataireID }, null) |
+                @Html.ActionLink("Delete", "Delete", "Locataires", new { id = item.LocataireID }, null)
+            </td>
+        </tr>
+    }
+
+</table>

@@ -1,0 +1,42 @@
+﻿@model IEnumerable<LocationDeVoitures.Models.Probleme>
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+    <table class="table">
+        <tr>
+            <th>
+                User Defendeur
+            </th>
+            <th>
+                User Plaignant
+            </th>
+            <th>
+                Date
+            </th>
+            <th>
+                Description
+            </th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+
+                    @Html.ActionLink(item.ApplicationUserProblemeDefendeur.UserName, "UserDetails", "Problemes", new { id = item.UserDefendeurID }, null)
+                </td>
+                <td>
+                    @Html.ActionLink(item.ApplicationUserProblemePlaignant.UserName, "UserDetails", "Problemes", new { id = item.UserPlaignantID }, null)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Date)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Description)
+                </td>
+            </tr>
+        }
+
+    </table>

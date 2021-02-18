@@ -1,0 +1,51 @@
+﻿@model IEnumerable<LocationDeVoitures.Models.Voiture>
+@{
+    ViewBag.Title = "Home Page";
+}
+
+<h2 class="modal-title"></h2>
+
+<div class="vouture-list-top">
+    <H3 class="float-left" href="#">List Des Voiture</H3>
+
+    @using (Html.BeginForm("Index", "Voitures", FormMethod.Post, new { @class = "form-inline mt-2 mt-md-0 float-right", role = "form" }))
+    {
+        <input class="form-control mr-sm-2" type="text" name="Search" placeholder="Search" aria-label="Search">
+        @Html.DropDownList("opt", new SelectList(Enum.GetValues(typeof(LocationDeVoitures.Models.Search))),
+         "option", new { @class = "btn btn-secondary mr-sm-2 dropdown-toggle" })
+        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+    }
+</div>
+
+
+<ul class="vouture-list">
+    @foreach (var item in Model)
+    {
+        <li class="col-3">
+            <div class="vouture-wraper">
+                <div class="vouture-image">
+                    @{
+                        var base64 = Convert.ToBase64String(item.Image);
+                        var imgSrc = String.Format("data:image/gif;base64,{0}", base64);
+                    }
+                    <img src="@imgSrc" style="height: 200px; width: 100%;" />
+                </div>
+                <div class="vouture-detial">
+                    <div class="vouture-detial-text">
+                        <div class="vouture-detial-desc">
+                            @Html.ActionLink(item.Marque, "Details", "Voitures", new { id = item.VoitureID }, new { @class = "p-2" })<br />
+                            <span class="p-2">@Html.DisplayFor(modelItem => item.Module)</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="vouture-detial-num ">
+                    <div class="vouture-detial-prix">
+                        <p class="bg-info">@Html.DisplayFor(modelItem => item.Prix) DH/h</p>
+                        <p class="bg-info"> @Html.DisplayFor(modelItem => item.Km) Km</p>
+                    </div>
+                </div>
+            </div>
+        </li>
+    }
+</ul>
