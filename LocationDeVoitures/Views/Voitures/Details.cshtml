@@ -3,92 +3,197 @@
     ViewBag.Title = "Details";
 }
 @using LocationDeVoitures.Models
-<div class="vouture-list-top navbar-expand">
-    <H2 class="float-left" href="#">Voiture</H2>
-    @if (User.IsInRole(MesConstants.RoleLocataire))
-    {
-        @Html.ActionLink("Location", "Create", "Locations", new { id = Model.VoitureList[0].VoitureID }, new { @class = "btn btn-outline-success my-2 my-sm-0 float-right" })
-    }
-    else if (User.IsInRole(MesConstants.RoleAgence) && ViewBag.BOOL)
-    {
-        @Html.ActionLink("Edit", "Edit", "Voitures", new { id = Model.VoitureList[0].VoitureID }, new { @class = "btn btn-outline-success my-2 my-sm-0 float-right" })
-        @Html.ActionLink("Add Offers", "Create", "Offres", new { id = Model.VoitureList[0].VoitureID }, new { @class = "btn btn-outline-success my-2 my-sm-0 float-right" })
-    }
-</div>
-<div class="col-md-9 align-content-md-center">
-    <div class="align-content-center">
-        <div>
-            <div class="vouture-image">
-                @{
-                    var base64 = Convert.ToBase64String(Model.VoitureList[0].Image);
-                    var imgSrc = String.Format("data:image/gif;base64,{0}", base64);
+
+<div style="text-align: -webkit-center;">
+    <div class="col-md-11 login-sec container-login">
+        <div class="vouture-list-top navbar-expand">
+            <H2 class="float-left">Voiture</H2>
+            <div class="w-100">
+                @if (User.IsInRole(MesConstants.RoleLocataire))
+                {
+                    @Html.ActionLink("Location", "Create", "Locations", new { id = Model.VoitureList[0].VoitureID }, new { @class = "btn btn-success my-2 my-sm-0  m-2 float-right" })
                 }
-                <img src="@imgSrc" />
+                @if (User.IsInRole(MesConstants.RoleAdministrateur))
+                {
+                    @Html.ActionLink("delete", "Create", "Offres", new { id = Model.VoitureList[0].VoitureID }, new { @class = "btn btn-success my-2 my-sm-0  m-2 float-right" })
+                }
+                @if (User.IsInRole(MesConstants.RoleAgence) && ViewBag.BOOL)
+                {
+                    @Html.ActionLink("delete", "Create", "Offres", new { id = Model.VoitureList[0].VoitureID }, new { @class = "btn btn-success my-2 my-sm-0  m-2 float-right" })
+                    @Html.ActionLink("Add Offers", "Create", "Offres", new { id = Model.VoitureList[0].VoitureID }, new { @class = "btn btn-success my-2 my-sm-0  m-2 float-right" })
+                    @Html.ActionLink("Edit", "Edit", "Voitures", new { id = Model.VoitureList[0].VoitureID }, new { @class = "btn btn-success my-2 my-sm-0  m-2 float-right" })
+                }
             </div>
         </div>
+        <div class="row m-2">
+            <div id="carouselExampleControls" class="carousel slide col-lg-6" data-ride="carousel">
+                <div class="carousel-inner">
+                    <div class="carousel-item active">
+
+                        @{
+                            var base64 = Convert.ToBase64String(Model.VoitureList[0].Image);
+                            var imgSrc = String.Format("data:image/gif;base64,{0}", base64);
+                        }
+                        <img class="d-block w-100" style="height: 430px" src="@imgSrc" alt="First slide">
+                    </div>
 
 
-
-        <div>
-
-            <div class="product-description">
-                <h3>@Model.VoitureList[0].Marque</h3>
-                <p>@Model.VoitureList[0].Description</p>
-            </div>
-
-            <div class="row gy-5">
-                <div class="col-md-6">
-                    <div class="p-3 border bg-light">@Model.VoitureList[0].Module</div>
-                </div>
-                <div class="col-md-6">
-                    <div class="p-3 border bg-light">@Model.VoitureList[0].Marque</div>
-                </div>
-                <div class="col-md-6">
-                    <div class="p-3 border bg-light">@Model.VoitureList[0].Prix</div>
-                </div>
-                <div class="col-md-6">
-                    <div class=" p-3 border bg-light">@Model.VoitureList[0].Km</div>
-                </div>
-            </div>
-
-        </div>
-        <div>
-            <h3>Offres</h3>
-
-            <table class="table table-striped">
-                <thead>
-                    <tr>
-                        <th scope="col">Pourcentage</th>
-                        <th scope="col">Start Date</th>
-                        <th scope="col">Duree</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach (var item in Model.OffreeList)
+                    @foreach (var item in Model.VoitureListImages)
                     {
-                        <tr>
-                            <td>@Html.DisplayFor(modelItem => item.Pourcentage)</td>
-                            <td>@Html.DisplayFor(modelItem => item.Data)</td>
-                            <td>@Html.DisplayFor(modelItem => item.Duree)</td>
-                        </tr>
-                    }
-                </tbody>
-            </table>
-        </div>
-
-        <div class="row  gy-5">
-            @foreach (var item in Model.VoitureListImages)
-            {
-                <div class="vouture-image-detail p-3 col-md-6">
-                    @{
-                        var bas = Convert.ToBase64String(item.Image);
-                        var img = String.Format("data:image/gif;base64,{0}", bas);
-                        <img src="@img" />
+                        <div class="carousel-item">
+                            @{
+                                var bas = Convert.ToBase64String(item.Image);
+                                var img = String.Format("data:image/gif;base64,{0}", bas);
+                                <img class="d-block w-100" style="height: 430px" src="@img" alt="Second slide">
+                            }
+                        </div>
                     }
                 </div>
-            }
-            
+                <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="sr-only bg-dark">Previous</span>
+                </a>
+                <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="sr-only bg-dark">Next</span>
+                </a>
             </div>
-    </div>
+            <div class="col-lg-6">
+                <div class="align-content-center">
+                    <div>
+                        <table class="table">
+                            <tr>
+                                <td>
+                                    @Html.DisplayNameFor(model => model.VoitureList[0].Matricule)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(model => model.VoitureList[0].Matricule)
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    @Html.DisplayNameFor(model => model.VoitureList[0].Prix)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(model => model.VoitureList[0].Prix)
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    @Html.DisplayNameFor(model => model.VoitureList[0].Module)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(model => model.VoitureList[0].Module)
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    @Html.DisplayNameFor(model => model.VoitureList[0].Marque)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(model => model.VoitureList[0].Marque)
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    @Html.DisplayNameFor(model => model.VoitureList[0].Km)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(model => model.VoitureList[0].Km)
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    @Html.DisplayNameFor(model => model.VoitureList[0].Couleur)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(model => model.VoitureList[0].Couleur)
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    @Html.DisplayNameFor(model => model.VoitureList[0].Description)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(model => model.VoitureList[0].Description)
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
 
+            </div>
+        </div>
+
+        <div class="row m-2">
+            <div class="col-lg-6">
+
+                <h2>Agence</h2>
+                <table class="table">
+                    <tr>
+                        <td>
+                            @Html.DisplayNameFor(model => Model.VoitureList[0].Agence.Nom)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(model => Model.VoitureList[0].Agence.Nom)
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            @Html.DisplayNameFor(model => Model.VoitureList[0].Agence.CodeAgence)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(model => Model.VoitureList[0].Agence.CodeAgence)
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            @Html.DisplayNameFor(model => Model.VoitureList[0].Agence.Tel)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(model => Model.VoitureList[0].Agence.Tel)
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            @Html.DisplayNameFor(model => Model.VoitureList[0].Agence.Address)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(model => Model.VoitureList[0].Agence.Address)
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            @Html.DisplayNameFor(model => Model.VoitureList[0].Agence.Ville)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(model => Model.VoitureList[0].Agence.Ville)
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            <div class="col-lg-6">
+                <h2>Offres</h2>
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th scope="col">Pourcentage</th>
+                            <th scope="col">Start Date</th>
+                            <th scope="col">Duree</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model.OffreeList)
+                        {
+                            <tr>
+                                <td>@Html.DisplayFor(modelItem => item.Pourcentage)</td>
+                                <td>@Html.DisplayFor(modelItem => item.Data)</td>
+                                <td>@Html.DisplayFor(modelItem => item.Duree)</td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
 </div>

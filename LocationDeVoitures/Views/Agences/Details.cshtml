@@ -2,52 +2,67 @@
 @{
     ViewBag.Title = "Details";
 }
+@using LocationDeVoitures.Models;
 
-<h2>Details</h2>
 
-<div>
-    <h4>Location</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Nom)
-        </dt>
+<div style="text-align: -webkit-center;">
+    <div class="col-md-9 login-sec container-login">
+        <h2 class="float-left">Agence</h2>
 
-        <dd>
-            @Html.DisplayFor(model => model.Nom)
-        </dd>
+        <div class="w-100">
+            @if (User.IsInRole(MesConstants.RoleAdministrateur) || User.IsInRole(MesConstants.RoleLocataire))
+            {
+                @Html.ActionLink("Add to List favoris", "Add", "ListFavoris", new { UserFavorisID = Model.UserID }, new { @class = "btn btn-success m-2 my-2 my-sm-0 float-right" })
+                @Html.ActionLink("Add to List Noire", "Add", "ListNoire", new { UserNoireID = Model.UserID }, new { @class = "btn btn-success my-2 m-2 my-sm-0 float-right" })
+            }
+            @if (User.IsInRole(MesConstants.RoleLocataire))
+            {
 
-        <dt>
-            @Html.DisplayNameFor(model => model.CodeAgence)
-        </dt>
+                @Html.ActionLink("Add a problem", "Create", "Problemes", new { id = Model.UserID }, new { @class = "btn btn-success my-2 m-2 my-sm-0 float-right" })
+            }
+        </div>
+            <table class="table">
+                <tr>
+                    <td>
+                        @Html.DisplayNameFor(model => model.Nom)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(model => model.Nom)
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        @Html.DisplayNameFor(model => model.CodeAgence)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(model => model.CodeAgence)
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        @Html.DisplayNameFor(model => model.Tel)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(model => model.Tel)
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        @Html.DisplayNameFor(model => model.Address)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(model => model.Address)
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        @Html.DisplayNameFor(model => model.Ville)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(model => model.Ville)
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
 
-        <dd>
-            @Html.DisplayFor(model => model.CodeAgence)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Address)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Address)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Ville)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Ville)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Tel)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Tel)
-        </dd>
-
-    </dl>
-</div>

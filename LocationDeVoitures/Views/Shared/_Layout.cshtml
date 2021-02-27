@@ -19,7 +19,7 @@
 
 </head>
 <body>
-    <div class="navbar navbar-expand-sm navbar-dark fixed-top bg-dark">
+    <div class="navbar navbar-expand-sm navbar-dark fixed-top" style="background: #5565a0;">
         <div class="container">
             <div class="navbar-header">
                 <button class="navbar-toggler"
@@ -28,12 +28,22 @@
                         data-target="#navbarSupportedContent"
                         aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 </button>
-                @Html.ActionLink("LocationDeVoitures", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                <h4>
+                    @Html.ActionLink("LocationDeVoitures", "Index", "Home", null, new { @class = "nav-link active text-dark" })
+                </h4>
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="navbar-nav mr-auto">
-                    <li class="nav-item">@Html.ActionLink("Home", "Index", "Home")</li>
-                    <li class="nav-item">@Html.ActionLink("Voitures", "Index", "Voitures")</li>
+                    <li class="nav-item">@Html.ActionLink("Home", "Index", "Home",null, new { @class = "nav-link active text-light" })</li>
+                    <li class="nav-item">@Html.ActionLink("Voitures", "Index", "Voitures",null, new { @class = "nav-link active text-light" })</li>
+                    @if (User.IsInRole(MesConstants.RoleAdministrateur) || User.IsInRole(MesConstants.RoleLocataire))
+                    {
+                        <li class="nav-item">@Html.ActionLink("Agences", "Index", "Agences",null, new { @class = "nav-link active text-light" })</li>
+                    }
+                    @if (User.IsInRole(MesConstants.RoleAdministrateur) || User.IsInRole(MesConstants.RoleAgence))
+                    {
+                        <li class="nav-item">@Html.ActionLink("Locataires", "Index", "Locataires", null, new { @class = "nav-link active text-light" })</li>
+                    }
                 </ul>
                 @Html.Partial("_LoginPartial")
             </div>
@@ -46,69 +56,62 @@
         @if (User.Identity.IsAuthenticated)
         {
 
-            <nav class="col-2 d-md-block navbar-dark bg-dark">
+            <nav class="col-2 d-md-block navbar-dark backcolor">
                 <div class="position-sticky pt-3">
                     <ul class="nav flex-column">
                         <li class="nav-item">
-                            @Html.ActionLink("Dashboard", "Dashboard", "Manage", routeValues: null, new { @class = "nav-link active" })
+                            @Html.ActionLink("Dashboard", "Dashboard", "Manage", routeValues: null, new { @class = "nav-link active text-light" })
                         </li>
 
                         @if (User.IsInRole(MesConstants.RoleAdministrateur))
                         {
                             <li class="nav-item">
-                                @Html.ActionLink("Historique des client", "Index", "Home", routeValues: null, new { @class = "nav-link active" })
+                                @Html.ActionLink("Historique des client", "Index", "Home", routeValues: null, new { @class = "nav-link active text-light" })
                             </li>
                             <li class="nav-item">
-                                @Html.ActionLink("List Des Probleme", "Index", "Problemes", routeValues: null, new { @class = "nav-link active" })
+                                @Html.ActionLink("List Des Probleme", "Index", "Problemes", routeValues: null, new { @class = "nav-link active text-light" })
                             </li>
                         }
                         @if (User.IsInRole(MesConstants.RoleAgence))
                         {
                             <li class="nav-item">
-                                @Html.ActionLink("Add Voiture", "Create", "Voitures", routeValues: null, new { @class = "nav-link active" })
+                                @Html.ActionLink("Add Voiture", "Create", "Voitures", routeValues: null, new { @class = "nav-link active text-light" })
                             </li>
                         }
                         <li class="nav-item">
-                            @Html.ActionLink("List Favoris", "Index", "ListFavoris", routeValues: null, new { @class = "nav-link active" })
+                            @Html.ActionLink("List Favoris", "Index", "ListFavoris", routeValues: null, new { @class = "nav-link active text-light" })
                         </li>
                         <li class="nav-item">
-                            @Html.ActionLink("List Noire", "Index", "ListNoire", routeValues: null, new { @class = "nav-link active" })
+                            @Html.ActionLink("List Noire", "Index", "ListNoire", routeValues: null, new { @class = "nav-link active text-light" })
                         </li>
                     </ul>
                     <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
-                        <span>Profile</span>
-                        <a class="link-secondary" href="#" aria-label="Add a new report">
-                            <span data-feather="plus-circle"></span>
-                        </a>
+                        <span class="text-dark">Profile</span>
                     </h6>
                     <ul class="nav flex-column mb-2">
                         <li class="nav-item">
                             @if (User.IsInRole(MesConstants.RoleAdministrateur))
                             {
-                                @Html.ActionLink("UpDate Profile", "Edit", "Administrateurs", routeValues: null, new { @class = "nav-link active" })
+                                @Html.ActionLink("UpDate Profile", "Edit", "Administrateurs", routeValues: null, new { @class = "nav-link active text-light" })
                             }
                             else if (User.IsInRole(MesConstants.RoleAgence))
                             {
-                                @Html.ActionLink("UpDate Profile", "Edit", "Agences", routeValues: null, new { @class = "nav-link active" })
+                                @Html.ActionLink("UpDate Profile", "Edit", "Agences", routeValues: null, new { @class = "nav-link active text-light" })
                             }
                             else if (User.IsInRole(MesConstants.RoleLocataire))
                             {
-                                @Html.ActionLink("UpDate Profile", "Edit", "Locataires", routeValues: null, new { @class = "nav-link active" })
+                                @Html.ActionLink("UpDate Profile", "Edit", "Locataires", routeValues: null, new { @class = "nav-link active text-light" })
                             }
                         </li>
                         <li class="nav-item">
-                            @Html.ActionLink("Change your password", "ChangePassword", "Manage", routeValues: null, new { @class = "nav-link active" })
+                            @Html.ActionLink("Change your password", "ChangePassword", "Manage", routeValues: null, new { @class = "nav-link active text-light" })
                         </li>
                     </ul>
                 </div>
             </nav>
         }
-        <div class="col-10">
+        <div class="p-4 w-100">
             @RenderBody()
-            <hr />
-            <footer>
-                <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
-            </footer>
         </div>
     </main>
 

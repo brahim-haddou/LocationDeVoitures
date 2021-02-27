@@ -33,6 +33,7 @@ namespace LocationDeVoitures.Controllers
             {
                 return HttpNotFound();
             }
+            ViewBag.idVoiture = location.VoitureLocation.VoitureID;
             return View(location);
         }
 
@@ -84,6 +85,7 @@ namespace LocationDeVoitures.Controllers
             }
             ViewBag.LocataireID = new SelectList(db.Locataires, "LocataireID", "Nom", location.LocataireID);
             ViewBag.VoitureID = new SelectList(db.Voitures, "VoitureID", "Matricule", location.VoitureID);
+            ViewBag.Voiture = location.VoitureID;
             return View(location);
         }
 
@@ -94,6 +96,10 @@ namespace LocationDeVoitures.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "LocationID,VoitureID,LocataireID,Data,Duree,ChoiseDePayment,Status")] Location location)
         {
+            if (User.IsInRole(MesConstants.RoleLocataire))
+            {
+                location.Status = false;
+            }
             if (ModelState.IsValid)
             {
                 db.Entry(location).State = EntityState.Modified;
@@ -105,7 +111,6 @@ namespace LocationDeVoitures.Controllers
             return View(location);
         }
 
-        // GET: Locations/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)

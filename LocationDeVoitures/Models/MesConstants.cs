@@ -15,7 +15,10 @@ namespace LocationDeVoitures.Models
     {
         Administrateur, Agence, Locataire
     }
-
+    public enum ChoixDePaiement
+    {
+        Carte, Chèque, Espèce, Paypal
+    }
     public enum Search
     {
         Couleur, Km, Marque, Module

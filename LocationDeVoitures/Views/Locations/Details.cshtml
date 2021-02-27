@@ -1,66 +1,240 @@
 ﻿@model LocationDeVoitures.Models.Location
-
+@using LocationDeVoitures.Models
 @{
     ViewBag.Title = "Details";
 }
+<div style="text-align: -webkit-center;">
+    <div class="col-md-10 login-sec container-login">
+        <h2>Location</h2>
+        <table class="table">
+            <tr>
+                <td>
+                    @Html.DisplayNameFor(model => model.VoitureLocation.Matricule)
+                </td>
+                <td>
+                    @Html.DisplayFor(model => model.VoitureLocation.Matricule)
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    @Html.DisplayNameFor(model => model.Data)
+                </td>
+                <td>
+                    @Html.DisplayFor(model => model.Data)
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    @Html.DisplayNameFor(model => model.Duree)
+                </td>
+                <td>
+                    @Html.DisplayFor(model => model.Duree)
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    @Html.DisplayNameFor(model => model.ChoiseDePayment)
+                </td>
+                <td>
+                    @Html.DisplayFor(model => model.ChoiseDePayment)
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    @Html.DisplayNameFor(model => model.Status)
+                </td>
+                <td>
+                    @Html.DisplayFor(model => model.Status)
+                </td>
+            </tr>
+        </table>
+        <div class="row">
+            @if (User.IsInRole(MesConstants.RoleAdministrateur))
+            {
+                <div class="col-lg-6">
+                    <h2>Locataire</h2>
+                    <table class="table">
+                        <tr>
+                            <td>
+                                @Html.DisplayNameFor(model => model.LocataireLocation.Nom)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(model => model.LocataireLocation.Nom)
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                @Html.DisplayNameFor(model => model.LocataireLocation.Prenom)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(model => model.LocataireLocation.Prenom)
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                @Html.DisplayNameFor(model => model.LocataireLocation.Tel)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(model => model.LocataireLocation.Tel)
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                @Html.DisplayNameFor(model => model.LocataireLocation.Address)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(model => model.LocataireLocation.Address)
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                @Html.DisplayNameFor(model => model.LocataireLocation.Ville)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(model => model.LocataireLocation.Ville)
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="col-lg-6">
+                    <h2>Agence</h2>
+                    <table class="table">
+                        <tr>
+                            <td>
+                                @Html.DisplayNameFor(model => model.VoitureLocation.Agence.Nom)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(model => model.VoitureLocation.Agence.Nom)
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                @Html.DisplayNameFor(model => model.VoitureLocation.Agence.CodeAgence)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(model => model.VoitureLocation.Agence.CodeAgence)
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                @Html.DisplayNameFor(model => model.VoitureLocation.Agence.Tel)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(model => model.VoitureLocation.Agence.Tel)
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                @Html.DisplayNameFor(model => model.VoitureLocation.Agence.Address)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(model => model.VoitureLocation.Agence.Address)
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                @Html.DisplayNameFor(model => model.VoitureLocation.Agence.Ville)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(model => model.VoitureLocation.Agence.Ville)
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            }
+        </div>
 
-<h2>Details</h2>
-
-<div>
-    <h4>Location</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.LocataireLocation.Nom)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.LocataireLocation.Nom)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.VoitureLocation.Matricule)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.VoitureLocation.Matricule)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Data)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Data)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Duree)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Duree)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.ChoiseDePayment)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.ChoiseDePayment)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Status)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Status)
-        </dd>
-
-    </dl>
+        @if (User.IsInRole(MesConstants.RoleAgence))
+        {
+            <h2>Locataire</h2>
+            <table class="table">
+                <tr>
+                    <td>
+                        @Html.DisplayNameFor(model => model.LocataireLocation.Nom)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(model => model.LocataireLocation.Nom)
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        @Html.DisplayNameFor(model => model.LocataireLocation.Prenom)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(model => model.LocataireLocation.Prenom)
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        @Html.DisplayNameFor(model => model.LocataireLocation.Tel)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(model => model.LocataireLocation.Tel)
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        @Html.DisplayNameFor(model => model.LocataireLocation.Address)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(model => model.LocataireLocation.Address)
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        @Html.DisplayNameFor(model => model.LocataireLocation.Ville)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(model => model.LocataireLocation.Ville)
+                    </td>
+                </tr>
+            </table>
+        }
+        @if (User.IsInRole(MesConstants.RoleLocataire))
+        {
+            <h2>Agence</h2>
+            <table class="table">
+                <tr>
+                    <td>
+                        @Html.DisplayNameFor(model => model.VoitureLocation.Agence.Nom)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(model => model.VoitureLocation.Agence.Nom)
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        @Html.DisplayNameFor(model => model.VoitureLocation.Agence.CodeAgence)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(model => model.VoitureLocation.Agence.CodeAgence)
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        @Html.DisplayNameFor(model => model.VoitureLocation.Agence.Tel)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(model => model.VoitureLocation.Agence.Tel)
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        @Html.DisplayNameFor(model => model.VoitureLocation.Agence.Address)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(model => model.VoitureLocation.Agence.Address)
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        @Html.DisplayNameFor(model => model.VoitureLocation.Agence.Ville)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(model => model.VoitureLocation.Agence.Ville)
+                    </td>
+                </tr>
+            </table>
+        }
+    </div>
 </div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.LocationID }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>

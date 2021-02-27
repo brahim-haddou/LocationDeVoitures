@@ -3,49 +3,33 @@
 @{
     ViewBag.Title = "Create";
 }
+<div style="text-align: -webkit-center;">
+    <div class="col-md-7 login-sec container-login">
+        <h2>Create Offre</h2>
 
-<h2>Create</h2>
+        @using (Html.BeginForm(new { Id_Voiture = ViewBag.Id_Voiture }))
+        {
+            @Html.AntiForgeryToken()
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            <div class="form-group">
+                @Html.LabelFor(m => m.Pourcentage, new { @class = "text-uppercase float-left" })
+                @Html.TextBoxFor(m => m.Pourcentage, new { @class = "form-control", @type = "number", @step = "0.01" })
+                @Html.ValidationMessageFor(m => m.Pourcentage, "", new { @class = "text-danger" })
+            </div>
 
-@using (Html.BeginForm(new { Id_Voiture = ViewBag.Id_Voiture })) 
-{
-    @Html.AntiForgeryToken()
-    
-<div class="form-horizontal">
-    <h4>Offre</h4>
-    <hr />
-    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-    <div class="form-group">
-        @Html.LabelFor(model => model.Pourcentage, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.Pourcentage, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.Pourcentage, "", new { @class = "text-danger" })
-        </div>
+            <div class="form-group">
+                @Html.LabelFor(m => m.Data, new { @class = "text-uppercase float-left" })
+                @Html.TextBoxFor(m => m.Data, new { @class = "form-control", @type = "datetime-local" })
+                @Html.ValidationMessageFor(m => m.Data, "", new { @class = "text-danger" })
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(m => m.Duree, new { @class = "text-uppercase float-left" })
+                @Html.TextBoxFor(m => m.Duree, new { @class = "form-control", @type = "number" })
+                @Html.ValidationMessageFor(m => m.Duree, "", new { @class = "text-danger" })
+            </div>
+
+            <button type="submit" class="btn btn btn-primary w-100 btn-login float-right">Create</button>
+        }
     </div>
-
-    <div class="form-group">
-        @Html.LabelFor(model => model.Data, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.Data, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.Data, "", new { @class = "text-danger" })
-        </div>
-    </div>
-
-    <div class="form-group">
-        @Html.LabelFor(model => model.Duree, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.Duree, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.Duree, "", new { @class = "text-danger" })
-        </div>
-    </div>
-
-    <div class="form-group">
-        <div class="col-md-offset-2 col-md-10">
-            <input type="submit" value="Create" class="btn btn-default" />
-        </div>
-    </div>
-</div>
-}
-
-<div>
-    @Html.ActionLink("Back to List", "Index")
 </div>

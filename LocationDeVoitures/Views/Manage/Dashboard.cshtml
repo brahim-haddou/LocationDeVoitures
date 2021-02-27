@@ -3,352 +3,183 @@
     ViewBag.Title = "Dashboard";
 }
 @using LocationDeVoitures.Models
-<main class="">
-    <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-        <h1 class="h2">Dashboard</h1>
-    </div>
+<div style="text-align: -webkit-center;">
+    <div class="col-md-11 login-sec container-login">           
 
-    <div class="my-4 w-100" id="myChart" width="900" height="400">
-        @if (User.IsInRole(MesConstants.RoleAdministrateur))
-        {
-            <img src="@Url.Action("MyChartAdmin")" />
-        }
-        @if (User.IsInRole(MesConstants.RoleAgence))
-        {
-            <img src="@Url.Action("MyChartAgence")" />
-        }
-        @if (User.IsInRole(MesConstants.RoleLocataire))
-        {
-            <img src="@Url.Action("MyChartLocataire")" />
-        }
-    </div>
-
-    <div class="my-4 w-100" id="myChart" width="900" height="400">
-        @if (User.IsInRole(MesConstants.RoleAdministrateur))
-        {
-            <h2>Agence List</h2>
-            <table class="table">
-                <tr>
-                    <th>
-                        Nom
-                    </th>
-                    <th>
-                        CodeAgence
-                    </th>
-                    <th>
-                        Address
-                    </th>
-                    <th>
-                        Ville
-                    </th>
-                    <th>
-                        Tel
-                    </th>
-                </tr>
-
-                @foreach (var item in Model.AgenceList)
+        <div class="my-4 w-100" id="myChart" width="900" height="400">
+            <div class="w-100" id="myChart" width="900" height="400">
+                @if (User.IsInRole(MesConstants.RoleAdministrateur))
                 {
-                    <tr>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Nom)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.CodeAgence)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Address)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Ville)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Tel)
-                        </td>
-                        <td>
-                            @Html.ActionLink("Edit", "Edit", "Agences", new { id = item.AgenceID }, null) |
-                            @Html.ActionLink("Details", "Details", "Agences", new { id = item.AgenceID }, null) |
-                            @Html.ActionLink("Delete", "Delete", "Agences", new { id = item.AgenceID }, null)
-                        </td>
-                    </tr>
+                    <img src="@Url.Action("MyChartAdmin")" />
                 }
-
-            </table>
-
-            <h2>Voiture List</h2>
-            <table class="table">
-                <tr>
-                    <th>
-                        Agence
-                    </th>
-                    <th>
-                        Matricule
-                    </th>
-                    <th>
-                        Marque
-                    </th>
-                    <th>
-                        Prix
-                    </th>
-                    <th>
-                        Module
-                    </th>
-                    <th>
-                        Km
-                    </th>
-                </tr>
-
-                @foreach (var item in Model.VoitureList)
+                @if (User.IsInRole(MesConstants.RoleAgence))
                 {
-                    <tr>
-                        <td>
-                            @Html.ActionLink(item.Agence.Nom, "Details", "Agences", new { id = item.AgenceID }, null)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Matricule)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Marque)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Prix)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Module)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Km)
-                        </td>
-                        <td>
-                            @Html.ActionLink("Edit", "Edit", "Voitures", new { id = item.VoitureID }, null) |
-                            @Html.ActionLink("Details", "Details", "Voitures", new { id = item.VoitureID }, null) |
-                            @Html.ActionLink("Delete", "Delete", "Voitures", new { id = item.VoitureID }, null)
-                        </td>
-                    </tr>
+                    <img src="@Url.Action("MyChartAgence")" />
                 }
-
-            </table>
-
-            <h2>Locataire List</h2>
-            <table class="table">
-                <tr>
-                    <th>
-                        Nom
-                    </th>
-                    <th>
-                        Prenom
-                    </th>
-                    <th>
-                        CIN
-                    </th>
-                    <th>
-                        Address
-                    </th>
-                    <th>
-                        Ville
-                    </th>
-                </tr>
-
-                @foreach (var item in Model.LocataireList)
+                @if (User.IsInRole(MesConstants.RoleLocataire))
                 {
-                    <tr>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Nom)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Prenom)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.CIN)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Address)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Ville)
-                        </td>
-                        <td>
-                            @Html.ActionLink("Edit", "Edit", "Locataires", new { id = item.LocataireID }, null) |
-                            @Html.ActionLink("Details", "Details", "Locataires", new { id = item.LocataireID }, null) |
-                            @Html.ActionLink("Delete", "Delete", "Locataires", new { id = item.LocataireID }, null)
-                        </td>
-                    </tr>
-                 }
-
-            </table>
-
-            <h2>Location list</h2>
-            <table class="table">
-                <tr>
-                    <th>
-                        Locataire
-                    </th>
-                    <th>
-                        Agence
-                    </th>
-                    <th>
-                        Voiture Matricule
-                    </th>
-                    <th>
-                        Data
-                    </th>
-                    <th>
-                        Duree
-                    </th>
-                    <th>
-                        Choise De Payment
-                    </th>
-                    <th>
-                        Status
-                    </th>
-                </tr>
-
-                @foreach (var item in Model.LocationList)
-                {
-                    <tr>1
-                        <td>
-                            @Html.ActionLink(item.LocataireLocation.Nom, "Details", "Locataires", new { id = item.LocataireID }, null)
-                        </td>
-                        <td>
-                            @Html.ActionLink(item.VoitureLocation.Agence.Nom, "Details", "Agences", new { id = item.VoitureLocation.AgenceID }, null)
-                        </td>
-                        <td>
-                            @Html.ActionLink(item.VoitureLocation.Matricule, "Details", "Voitures", new { id = item.VoitureLocation.VoitureID }, null)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Data)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Duree)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.ChoiseDePayment)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Status)
-                        </td>
-                        <td>
-                            @Html.ActionLink("Edit", "Edit", "Locations", new { id = item.LocationID }, null) |
-                            @Html.ActionLink("Details", "Details", "Locations", new { id = item.LocationID }, null) |
-                            @Html.ActionLink("Delete", "Delete", "Locations", new { id = item.LocationID }, null)
-                        </td>
-                    </tr>
+                    <img src="@Url.Action("MyChartLocataire")" />
                 }
+            </div>
 
-            </table>
-        }
-        @if (User.IsInRole(MesConstants.RoleAgence))
-        {
-
-            <h2>Voiture List</h2>
-            <table class="table">
-                <tr>
-                    <th>
-                        Matricule
-                    </th>
-                    <th>
-                        Marque
-                    </th>
-                    <th>
-                        Prix
-                    </th>
-                    <th>
-                        Module
-                    </th>
-                    <th>
-                        Km
-                    </th>
-                    <th>
-                        Agence
-                    </th>
-                </tr>
-
-                @foreach (var item in Model.VoitureList)
-                {
-                    <tr>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Matricule)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Marque)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Prix)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Module)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Km)
-                        </td>
-                        <td>
-                            @Html.ActionLink("Edit", "Edit", "Voitures", new { id = item.VoitureID }, null) |
-                            @Html.ActionLink("Details", "Details", "Voitures", new { id = item.VoitureID }, null) |
-                            @Html.ActionLink("Delete", "Delete", "Voitures", new { id = item.VoitureID }, null)
-                        </td>
-                    </tr>
-                }
-
-            </table>
-
-            <h2>Location list</h2>
-            <table class="table">
-                <tr>
-                    <th>
-                        Locataire
-                    </th>
-                    <th>
-                        Agence
-                    </th>
-                    <th>
-                        Voiture Matricule
-                    </th>
-                    <th>
-                        Data
-                    </th>
-                    <th>
-                        Duree
-                    </th>
-                    <th>
-                        Choise De Payment
-                    </th>
-                    <th>
-                        Status
-                    </th>
-                </tr>
-
-                @foreach (var item in Model.LocationList)
-                {
-                    <tr>
-                        <td>
-                            @Html.ActionLink(item.LocataireLocation.Nom, "Details", "Locataires", new { id = item.LocataireID }, null)
-                        </td>
-                        <td>
-                            @Html.ActionLink(item.VoitureLocation.Matricule, "Details", "Voitures", new { id = item.VoitureLocation.VoitureID }, null)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Data)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Duree)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.ChoiseDePayment)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Status)
-                        </td>
-                        <td>
-                            @Html.ActionLink("Edit", "Edit", "Locations", new { id = item.LocationID }, null) |
-                            @Html.ActionLink("Details", "Details", "Locations", new { id = item.LocationID }, null) |
-                            @Html.ActionLink("Delete", "Delete", "Locations", new { id = item.LocationID }, null)
-                        </td>
-                    </tr>
-                }
-
-            </table>
-         }
-        @if (User.IsInRole(MesConstants.RoleLocataire))
+            @if (User.IsInRole(MesConstants.RoleAdministrateur))
             {
+                <h2>Agence List</h2>
+                <table class="table">
+                    <tr>
+                        <th>
+                            Nom
+                        </th>
+                        <th>
+                            CodeAgence
+                        </th>
+                        <th>
+                            Address
+                        </th>
+                        <th>
+                            Ville
+                        </th>
+                        <th>
+                            Tel
+                        </th>
+                        <th>
+                            
+                        </th>
+                    </tr>
+
+                    @foreach (var item in Model.AgenceList)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Nom)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.CodeAgence)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Address)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Ville)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Tel)
+                            </td>
+                            <td>
+                                @Html.ActionLink("Details", "Details", "Agences", new { id = item.AgenceID }, null) |
+                                @Html.ActionLink("Delete", "Delete", "Agences", new { id = item.AgenceID }, null)
+                            </td>
+                        </tr>
+                    }
+
+                </table>
+
+                <h2>Voiture List</h2>
+                <table class="table">
+                    <tr>
+                        <th>
+                            Agence
+                        </th>
+                        <th>
+                            Matricule
+                        </th>
+                        <th>
+                            Marque
+                        </th>
+                        <th>
+                            Prix
+                        </th>
+                        <th>
+                            Module
+                        </th>
+                        <th>
+                            Km
+                        </th>
+                        <th>
+
+                        </th>
+                    </tr>
+
+                    @foreach (var item in Model.VoitureList)
+                    {
+                        <tr>
+                            <td>
+                                @Html.ActionLink(item.Agence.Nom, "Details", "Agences", new { id = item.AgenceID }, null)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Matricule)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Marque)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Prix)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Module)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Km)
+                            </td>
+                            <td>
+                                @Html.ActionLink("Details", "Details", "Voitures", new { id = item.VoitureID }, null) |
+                                @Html.ActionLink("Delete", "Delete", "Voitures", new { id = item.VoitureID }, null)
+                            </td>
+                        </tr>
+                    }
+
+                </table>
+
+                <h2>Locataire List</h2>
+                <table class="table">
+                    <tr>
+                        <th>
+                            Nom
+                        </th>
+                        <th>
+                            Prenom
+                        </th>
+                        <th>
+                            CIN
+                        </th>
+                        <th>
+                            Address
+                        </th>
+                        <th>
+                            Ville
+                        </th>
+                        <th>
+
+                        </th>
+                    </tr>
+
+                    @foreach (var item in Model.LocataireList)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Nom)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Prenom)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.CIN)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Address)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Ville)
+                            </td>
+                            <td>
+                                @Html.ActionLink("Details", "Details", "Locataires", new { id = item.LocataireID }, null) |
+                                @Html.ActionLink("Delete", "Delete", "Locataires", new { id = item.LocataireID }, null)
+                            </td>
+                        </tr>
+                    }
+
+                </table>
+
                 <h2>Location list</h2>
                 <table class="table">
                     <tr>
@@ -372,6 +203,184 @@
                         </th>
                         <th>
                             Status
+                        </th>
+                        <th>
+
+                        </th>
+                    </tr>
+
+                    @foreach (var item in Model.LocationList)
+                    {
+                        <tr>
+                            1
+                            <td>
+                                @Html.ActionLink(item.LocataireLocation.Nom, "Details", "Locataires", new { id = item.LocataireID }, null)
+                            </td>
+                            <td>
+                                @Html.ActionLink(item.VoitureLocation.Agence.Nom, "Details", "Agences", new { id = item.VoitureLocation.AgenceID }, null)
+                            </td>
+                            <td>
+                                @Html.ActionLink(item.VoitureLocation.Matricule, "Details", "Voitures", new { id = item.VoitureLocation.VoitureID }, null)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Data)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Duree)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.ChoiseDePayment)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Status)
+                            </td>
+                            <td>
+                                @Html.ActionLink("Details", "Details", "Locations", new { id = item.LocationID }, null) |
+                                @Html.ActionLink("Delete", "Delete", "Locations", new { id = item.LocationID }, null)
+                            </td>
+                        </tr>
+                    }
+
+                </table>
+            }
+            @if (User.IsInRole(MesConstants.RoleAgence))
+            {
+
+                <h2>Voiture List</h2>
+                <table class="table">
+                    <tr>
+                        <th>
+                            Matricule
+                        </th>
+                        <th>
+                            Marque
+                        </th>
+                        <th>
+                            Prix
+                        </th>
+                        <th>
+                            Module
+                        </th>
+                        <th>
+                            Km
+                        </th>
+                        <th>
+                            Agence
+                        </th>
+                        <th>
+
+                        </th>
+                    </tr>
+
+                    @foreach (var item in Model.VoitureList)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Matricule)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Marque)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Prix)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Module)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Km)
+                            </td>
+                            <td>
+                                @Html.ActionLink("Edit", "Edit", "Voitures", new { id = item.VoitureID }, null) |
+                                @Html.ActionLink("Details", "Details", "Voitures", new { id = item.VoitureID }, null) |
+                                @Html.ActionLink("Delete", "Delete", "Voitures", new { id = item.VoitureID }, null)
+                            </td>
+                        </tr>
+                    }
+
+                </table>
+
+                <h2>Location list</h2>
+                <table class="table">
+                    <tr>
+                        <th>
+                            Locataire
+                        </th>
+                        <th>
+                            Voiture Matricule
+                        </th>
+                        <th>
+                            Data
+                        </th>
+                        <th>
+                            Duree
+                        </th>
+                        <th>
+                            Choise De Payment
+                        </th>
+                        <th>
+                            Status
+                        </th>
+                        <th>
+
+                        </th>
+                    </tr>
+
+                    @foreach (var item in Model.LocationList)
+                    {
+                        <tr>
+                            <td>
+                                @Html.ActionLink(item.LocataireLocation.Nom, "Details", "Locataires", new { id = item.LocataireID }, null)
+                            </td>
+                            <td>
+                                @Html.ActionLink(item.VoitureLocation.Matricule, "Details", "Voitures", new { id = item.VoitureLocation.VoitureID }, null)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Data)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Duree)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.ChoiseDePayment)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Status)
+                            </td>
+                            <td>
+                                @Html.ActionLink("Edit", "Edit", "Locations", new { id = item.LocationID }, null) |
+                                @Html.ActionLink("Details", "Details", "Locations", new { id = item.LocationID }, null)
+                            </td>
+                        </tr>
+                    }
+
+                </table>
+            }
+            @if (User.IsInRole(MesConstants.RoleLocataire))
+            {
+                <h2 class="float-left">Location list</h2>
+                <table class="table">
+                    <tr>
+                        <th>
+                            Agence
+                        </th>
+                        <th>
+                            Voiture Matricule
+                        </th>
+                        <th>
+                            Data
+                        </th>
+                        <th>
+                            Duree
+                        </th>
+                        <th>
+                            Choise De Payment
+                        </th>
+                        <th>
+                            Status
+                        </th>
+                        <th>
+
                         </th>
                     </tr>
 
@@ -397,14 +406,15 @@
                                 @Html.DisplayFor(modelItem => item.Status)
                             </td>
                             <td>
-                                @Html.ActionLink("Edit", "Edit", new { id = item.LocationID }) |
-                                @Html.ActionLink("Details", "Details", new { id = item.LocationID }) |
-                                @Html.ActionLink("Delete", "Delete", new { id = item.LocationID })
+                                @Html.ActionLink("Edit", "Edit", "Locations", new { id = item.LocationID }, null) |
+                                @Html.ActionLink("Details", "Details", "Locations", new { id = item.LocationID }, null) |
+                                @Html.ActionLink("Delete", "Delete", "Locations", new { id = item.LocationID }, null)
                             </td>
                         </tr>
                     }
 
                 </table>
             }
+        </div>
     </div>
-</main>
+</div>

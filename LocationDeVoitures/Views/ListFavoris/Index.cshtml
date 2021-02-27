@@ -4,199 +4,213 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
 
-@if (User.IsInRole(MesConstants.RoleAdministrateur))
-{
-    <h2>Agence List</h2>
-    <table class="table">
-        <tr>
-            <th>
-                Nom
-            </th>
-            <th>
-                CodeAgence
-            </th>
-            <th>
-                Address
-            </th>
-            <th>
-                Ville
-            </th>
-            <th>
-                Tel
-            </th>
-        </tr>
+<div style="text-align: -webkit-center;">
+    <div class="col-md-10 login-sec container-login">
 
-        @foreach (var item in Model.AgenceList)
+        @if (User.IsInRole(MesConstants.RoleAdministrateur))
         {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Nom)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.CodeAgence)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Address)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Ville)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Tel)
-                </td>
-                <td>
-                    @Html.ActionLink("Annuler", "Edit", "Agences", new { id = item.AgenceID }, null)
-                </td>
-            </tr>
+            <h2>Agence List</h2>
+            <table class="table">
+                <tr>
+                    <th>
+                        Nom
+                    </th>
+                    <th>
+                        CodeAgence
+                    </th>
+                    <th>
+                        Address
+                    </th>
+                    <th>
+                        Ville
+                    </th>
+                    <th>
+                        Tel
+                    </th>
+                    <th>
+                    </th>
+                </tr>
+
+                @foreach (var item in Model.AgenceList)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Nom)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.CodeAgence)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Address)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Ville)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Tel)
+                        </td>
+                        <td>
+                            @Html.ActionLink("Annuler", "Remove", "ListFavoris", new { id = item.UserID }, null)
+                        </td>
+                    </tr>
+                }
+
+            </table>
+
+
+            <h2>Locataire List</h2>
+            <table class="table">
+                <tr>
+                    <th>
+                        Nom
+                    </th>
+                    <th>
+                        Prenom
+                    </th>
+                    <th>
+                        CIN
+                    </th>
+                    <th>
+                        Address
+                    </th>
+                    <th>
+                        Ville
+                    </th>
+                    <th>
+                    </th>
+                </tr>
+
+                @foreach (var item in Model.LocataireList)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Nom)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Prenom)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.CIN)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Address)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Ville)
+                        </td>
+                        <td>
+                            @Html.ActionLink("Annuler", "Remove", "ListFavoris", new { id = item.UserID }, null)
+
+                        </td>
+                    </tr>
+                }
+
+            </table>
         }
 
-    </table>
-
-
-    <h2>Locataire List</h2>
-    <table class="table">
-        <tr>
-            <th>
-                Nom
-            </th>
-            <th>
-                Prenom
-            </th>
-            <th>
-                CIN
-            </th>
-            <th>
-                Address
-            </th>
-            <th>
-                Ville
-            </th>
-        </tr>
-
-        @foreach (var item in Model.LocataireList)
+        @if (User.IsInRole(MesConstants.RoleAgence))
         {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Nom)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Prenom)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.CIN)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Address)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Ville)
-                </td>
-                <td>
-                    @Html.ActionLink("Annuler", "Edit", "Locataires", new { id = item.LocataireID }, null)
-                </td>
-            </tr>
+            <h2>Locataire List</h2>
+            <table class="table">
+                <tr>
+                    <th>
+                        Nom
+                    </th>
+                    <th>
+                        Prenom
+                    </th>
+                    <th>
+                        CIN
+                    </th>
+                    <th>
+                        Address
+                    </th>
+                    <th>
+                        Ville
+                    </th>
+                    <th>
+                    </th>
+                </tr>
+
+                @foreach (var item in Model.LocataireList)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Nom)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Prenom)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.CIN)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Address)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Ville)
+                        </td>
+                        <td>
+                            @Html.ActionLink("Annuler", "Remove", "ListFavoris", new { id = item.UserID }, null)
+                        </td>
+                    </tr>
+                }
+
+            </table>
         }
 
-    </table>
-}
-
-@if (User.IsInRole(MesConstants.RoleAgence))
-{
-    <h2>Locataire List</h2>
-    <table class="table">
-        <tr>
-            <th>
-                Nom
-            </th>
-            <th>
-                Prenom
-            </th>
-            <th>
-                CIN
-            </th>
-            <th>
-                Address
-            </th>
-            <th>
-                Ville
-            </th>
-        </tr>
-
-        @foreach (var item in Model.LocataireList)
+        @if (User.IsInRole(MesConstants.RoleLocataire))
         {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Nom)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Prenom)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.CIN)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Address)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Ville)
-                </td>
-                <td>
-                    @Html.ActionLink("Annuler", "Edit", "Locataires", new { id = item.LocataireID }, null)
-                </td>
-            </tr>
+            <h2>Agence List</h2>
+            <table class="table">
+                <tr>
+                    <th>
+                        Nom
+                    </th>
+                    <th>
+                        CodeAgence
+                    </th>
+                    <th>
+                        Address
+                    </th>
+                    <th>
+                        Ville
+                    </th>
+                    <th>
+                        Tel
+                    </th>
+                    <th>
+                    </th>
+                </tr>
+
+                @foreach (var item in Model.AgenceList)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Nom)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.CodeAgence)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Address)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Ville)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Tel)
+                        </td>
+                        <td>
+                            @Html.ActionLink("Annuler", "Remove", "ListFavoris", new { id = item.UserID }, null)
+                        </td>
+                    </tr>
+                }
+
+            </table>
+
         }
 
-    </table>
-}
-
-@if (User.IsInRole(MesConstants.RoleLocataire))
-{
-    <h2>Agence List</h2>
-    <table class="table">
-        <tr>
-            <th>
-                Nom
-            </th>
-            <th>
-                CodeAgence
-            </th>
-            <th>
-                Address
-            </th>
-            <th>
-                Ville
-            </th>
-            <th>
-                Tel
-            </th>
-        </tr>
-
-        @foreach (var item in Model.AgenceList)
-        {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Nom)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.CodeAgence)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Address)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Ville)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Tel)
-                </td>
-                <td>
-                    @Html.ActionLink("Annuler", "Edit", "Agences", new { id = item.AgenceID }, null)
-                </td>
-            </tr>
-        }
-
-    </table>
-
-}
+    </div>
+</div>

@@ -3,64 +3,65 @@
     ViewBag.Title = "Details";
 }
 
-<h2>Details</h2>
+@using LocationDeVoitures.Models
 
+<div style="text-align: -webkit-center;">
+    <div class="col-md-9 login-sec container-login">
+        <h2 class="float-left">Locataire</h2>
 
-<div>
-    <h4>Location</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Nom)
-        </dt>
+        <div class="w-100">
+            @if (User.IsInRole(MesConstants.RoleAdministrateur) || User.IsInRole(MesConstants.RoleAgence))
+            {
+                @Html.ActionLink("Add to List favoris", "Add", "ListFavoris", new { UserFavorisID = Model.UserID }, new { @class = "btn btn-success m-2 my-2 my-sm-0 float-right" })
+                @Html.ActionLink("Add to List Noire", "Add", "ListNoire", new { UserNoireID = Model.UserID }, new { @class = "btn btn-success m-2 my-2 my-sm-0 float-right" })
+            }
+            @if (User.IsInRole(MesConstants.RoleAgence))
+            {
 
-        <dd>
-            @Html.DisplayFor(model => model.Nom)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Prenom)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Prenom)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.CIN)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.CIN)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Address)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Address)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Ville)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Ville)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Tel)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Tel)
-        </dd>
-
-    </dl>
+                @Html.ActionLink("Add a problem", "Create", "Problemes", new { id = Model.UserID }, new { @class = "btn btn-success m-2 my-2 my-sm-0 float-right" })
+            }
+        </div>
+        <table class="table">
+            <tr>
+                <td>
+                    @Html.DisplayNameFor(model => model.Nom)
+                </td>
+                <td>
+                    @Html.DisplayFor(model => model.Nom)
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    @Html.DisplayNameFor(model => model.Prenom)
+                </td>
+                <td>
+                    @Html.DisplayFor(model => model.Prenom)
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    @Html.DisplayNameFor(model => model.Tel)
+                </td>
+                <td>
+                    @Html.DisplayFor(model => model.Tel)
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    @Html.DisplayNameFor(model => model.Address)
+                </td>
+                <td>
+                    @Html.DisplayFor(model => model.Address)
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    @Html.DisplayNameFor(model => model.Ville)
+                </td>
+                <td>
+                    @Html.DisplayFor(model => model.Ville)
+                </td>
+            </tr>
+        </table>
+    </div>
 </div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.LocataireID }) |
-    @Html.ActionLink("Back to List", "Index", "Home")
-</p>

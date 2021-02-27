@@ -16,6 +16,10 @@ namespace LocationDeVoitures.Controllers
 
         public ActionResult Index()
         {
+            ViewBag.Voitures = db.Voitures.Count();
+            ViewBag.Agences = db.Agences.Count();
+            ViewBag.Locataires = db.Locataires.Count();
+            ViewBag.Offres = db.Offres.Count();
             var of = db.Offres.ToList();
             var idsOf = of.Select(o => o.VoitureID);
             var VoiOf = db.Voitures.Where(v => idsOf.Contains(v.VoitureID)).ToList();

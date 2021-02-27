@@ -3,77 +3,170 @@
 @{
     ViewBag.Title = "Edit";
 }
+@using LocationDeVoitures.Models
 
-<h2>Edit</h2>
+<div style="text-align: -webkit-center;">
+    <div class="col-md-6 login-sec container-login">
+        <h2>Edit Location</h2>
 
-@using (Html.BeginForm())
-{
-    @Html.AntiForgeryToken()
-    
-    <div class="form-horizontal">
-        <h4>Location</h4>
-        <hr />
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        @Html.HiddenFor(model => model.LocationID)
+        @if (User.IsInRole(MesConstants.RoleAgence))
+        {
+            <h2 class="float-left">Location</h2>
+            <table class="table">
+                <tr>
+                    <td>
+                        @Html.DisplayNameFor(model => model.VoitureLocation.Matricule)
+                    </td>
+                    <td>
+                        @Html.ActionLink(Model.VoitureLocation.Matricule, "Details", "Voitures", new { id = ViewBag.Voiture }, null)
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        @Html.DisplayNameFor(model => model.Data)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(model => model.Data)
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        @Html.DisplayNameFor(model => model.Duree)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(model => model.Duree)
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        @Html.DisplayNameFor(model => model.ChoiseDePayment)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(model => model.ChoiseDePayment)
+                    </td>
+                </tr>
+            </table>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.VoitureID, "VoitureID", htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DropDownList("VoitureID", null, htmlAttributes: new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.VoitureID, "", new { @class = "text-danger" })
-            </div>
-        </div>
+            <h2 class="float-left">Locataire</h2>
+            <table class="table">
+                <tr>
+                    <td>
+                        @Html.DisplayNameFor(model => model.LocataireLocation.Nom)
+                    </td>
+                    <td>
+                        @Html.ActionLink(Model.LocataireLocation.Nom, "Details", "Locataires", new { id = Model.LocataireID }, null)
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        @Html.DisplayNameFor(model => model.LocataireLocation.Prenom)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(model => model.LocataireLocation.Prenom)
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        @Html.DisplayNameFor(model => model.LocataireLocation.Tel)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(model => model.LocataireLocation.Tel)
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        @Html.DisplayNameFor(model => model.LocataireLocation.Address)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(model => model.LocataireLocation.Address)
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        @Html.DisplayNameFor(model => model.LocataireLocation.Ville)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(model => model.LocataireLocation.Ville)
+                    </td>
+                </tr>
+            </table>
+        }
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.LocataireID, "LocataireID", htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DropDownList("LocataireID", null, htmlAttributes: new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.LocataireID, "", new { @class = "text-danger" })
-            </div>
-        </div>
+        @if (User.IsInRole(MesConstants.RoleLocataire))
+        {
+            <table class="table">
+                <tr>
+                    <td>
+                        @Html.DisplayNameFor(model => model.LocataireLocation.Nom)
+                    </td>
+                    <td>
+                        @Html.ActionLink(Model.VoitureLocation.Agence.Nom, "Details", "Agences", new { id = Model.VoitureLocation.Agence.AgenceID }, null)
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        @Html.DisplayNameFor(model => model.VoitureLocation.Matricule)
+                    </td>
+                    <td>
+                        @Html.ActionLink(Model.VoitureLocation.Matricule, "Details", "Voitures", new { id = Model.VoitureLocation.VoitureID }, null)
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        @Html.DisplayNameFor(model => model.Status)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(model => model.Status)
+                    </td>
+                </tr>
+            </table>
+        }
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.Data, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Data, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Data, "", new { @class = "text-danger" })
-            </div>
-        </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.Duree, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Duree, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Duree, "", new { @class = "text-danger" })
-            </div>
-        </div>
+        @using (Html.BeginForm("Edit", "Locations", FormMethod.Post))
+        {
+            @Html.AntiForgeryToken()
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            @Html.HiddenFor(model => model.LocationID)
+            @Html.HiddenFor(model => model.VoitureID)
+            @Html.HiddenFor(model => model.LocataireID)
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.ChoiseDePayment, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.ChoiseDePayment, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.ChoiseDePayment, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.Status, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                <div class="checkbox">
-                    @Html.EditorFor(model => model.Status)
-                    @Html.ValidationMessageFor(model => model.Status, "", new { @class = "text-danger" })
+            if (User.IsInRole(MesConstants.RoleAgence))
+            {
+                @Html.HiddenFor(model => model.Data)
+                @Html.HiddenFor(model => model.Duree)
+                @Html.HiddenFor(model => model.ChoiseDePayment)
+                <div class="form-group">
+                    @Html.LabelFor(m => m.Status, new { @class = "text-uppercase float-left" })
+                    @Html.EditorFor(m => m.Status, new { @class = "form-control",})
+                    @Html.ValidationMessageFor(m => m.Status, "", new { @class = "text-danger" })
                 </div>
-            </div>
-        </div>
+            }
 
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Save" class="btn btn-default" />
-            </div>
-        </div>
+
+            if (User.IsInRole(MesConstants.RoleLocataire))
+            {
+                @Html.HiddenFor(model => model.Status)
+
+                <div class="form-group">
+                    @Html.LabelFor(m => m.Data, new { @class = "text-uppercase float-left" })
+                    @Html.TextBoxFor(m => m.Data, new { @class = "form-control", @type = "datetime-local" })
+                    @Html.ValidationMessageFor(m => m.Data, "", new { @class = "text-danger" })
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(m => m.Duree, new { @class = "text-uppercase float-left" })
+                    @Html.TextBoxFor(m => m.Duree, new { @class = "form-control", @type = "number" })
+                    @Html.ValidationMessageFor(m => m.Duree, "", new { @class = "text-danger" })
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(m => m.ChoiseDePayment, new { @class = "text-uppercase" })
+                    @Html.DropDownListFor(model => model.ChoiseDePayment, new SelectList(Enum.GetValues(typeof(LocationDeVoitures.Models.ChoixDePaiement))),
+                        "Sélectionnez Votre Choix De Paiement", new { @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.ChoiseDePayment, "", new { @class = "text-danger" })
+                </div>
+            }
+            <button type="submit" class="btn btn btn-primary w-100 btn-login float-right">submit</button>
+        }
     </div>
-}
-
-<div>
-    @Html.ActionLink("Back to List", "Index")
 </div>

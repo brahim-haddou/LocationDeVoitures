@@ -149,7 +149,7 @@ namespace LocationDeVoitures.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(Voiture voiture, HttpPostedFileBase imageP)
+        public ActionResult Edit(Voiture voiture, HttpPostedFileBase imageP, IEnumerable<HttpPostedFileBase> imageS)
         {
 
 
@@ -163,23 +163,52 @@ namespace LocationDeVoitures.Controllers
 
             if (ModelState.IsValid)
             {
-                byte[] bytesP;
-                using (BinaryReader br = new BinaryReader(imageP.InputStream))
+                if (imageP != null)
                 {
-                    bytesP = br.ReadBytes(imageP.ContentLength);
-                    voiture.Image = null;
-                    voiture.Image = bytesP;
-                    db.Entry(voiture).State = EntityState.Modified;
-                    try
+                    byte[] bytesP;
+                    using (BinaryReader br = new BinaryReader(imageP.InputStream))
                     {
-                            db.SaveChanges();
-                    } catch (OptimisticConcurrencyException)
+                        bytesP = br.ReadBytes(imageP.ContentLength);
+                        voiture.Image = null;
+                        voiture.Image = bytesP;
+                    }
+                }
+                if (imageS != null)
+                {
+                    List<ImagesVoiture> vs = db.ImagesVoitures.Where(i => i.VoitureID == voiture.VoitureID).ToList();
+                    foreach(var e in vs)
                     {
-                        db.Refresh(RefreshMode.ClientWins, db.Voitures);
+                        db.ImagesVoitures.Remove(e);
                         db.SaveChanges();
                     }
-                return RedirectToAction("Index");
+                    foreach (var i in imageS)
+                    {
+                        byte[] bytesS;
+                        using (BinaryReader br = new BinaryReader(i.InputStream))
+                        {
+                            bytesS = br.ReadBytes(i.ContentLength);
+                            ImagesVoiture imagesVoiture = new ImagesVoiture()
+                            {
+                                Image = bytesS,
+                                VoitureID = voiture.VoitureID,
+                            };
+                            db.ImagesVoitures.Add(imagesVoiture);
+                        }
+                        db.SaveChanges();
+                    }
                 }
+
+                db.Entry(voiture).State = EntityState.Modified;
+                try
+                {
+                    db.SaveChanges();
+                }
+                catch (OptimisticConcurrencyException)
+                {
+                    db.Refresh(RefreshMode.ClientWins, db.Voitures);
+                    db.SaveChanges();
+                }
+                return RedirectToAction("Index");
             }
             ViewBag.AgenceID = new SelectList(db.Agences, "AgenceID", "nom", voiture.AgenceID);
             return View(voiture);

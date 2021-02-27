@@ -56,15 +56,16 @@ namespace LocationDeVoitures.Controllers
                 UserNoireID = UserNoireID
             };
             db.ListNoire.Add(Noire);
-            return View();
+            db.SaveChanges();
+            return RedirectToAction("index");
         }
-        public ActionResult Remove(string UserNoireID)
+        public ActionResult Remove(string id)
         {
             var user_id = db.Users.Where(x => x.UserName == System.Web.HttpContext.Current.User.Identity.Name).FirstOrDefault().Id;
-            ListNoire Noire = db.ListNoire.Where(l => l.UserID == user_id && l.UserNoireID == UserNoireID).FirstOrDefault();
+            ListNoire Noire = db.ListNoire.Where(l => l.UserID == user_id && l.UserNoireID == id).FirstOrDefault();
             db.ListNoire.Remove(Noire);
             db.SaveChanges();
-            return View();
+            return RedirectToAction("index");
         }
     }
 }

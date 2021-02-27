@@ -46,22 +46,25 @@ namespace LocationDeVoitures.Controllers
             return View();
         }
 
-        public ActionResult Add(string UserID, string UserFavorisID)
+        public ActionResult Add(string UserFavorisID)
         {
+            var user_id = db.Users.Where(x => x.UserName == System.Web.HttpContext.Current.User.Identity.Name).FirstOrDefault().Id;
             ListFavoris favoris = new ListFavoris()
             {
-                UserID = UserID,
+                UserID = user_id,
                 UserFavorisID = UserFavorisID
             };
             db.ListFavoris.Add(favoris);
-            return View();
+            db.SaveChanges();
+            return RedirectToAction("index");
         }
-        public ActionResult Remove(string UserID, string UserFavorisID)
+        public ActionResult Remove(string id)
         {
-            ListFavoris favoris = db.ListFavoris.Where(l => l.UserID == UserID && l.UserFavorisID == UserFavorisID).FirstOrDefault();
+            var user_id = db.Users.Where(x => x.UserName == System.Web.HttpContext.Current.User.Identity.Name).FirstOrDefault().Id;
+            ListFavoris favoris = db.ListFavoris.Where(l => l.UserID == user_id && l.UserFavorisID == id).FirstOrDefault();
             db.ListFavoris.Remove(favoris);
             db.SaveChanges();
-            return View();
+            return RedirectToAction("index");
         }
     }
 }

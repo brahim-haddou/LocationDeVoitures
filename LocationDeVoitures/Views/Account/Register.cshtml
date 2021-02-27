@@ -2,49 +2,69 @@
 @{
     ViewBag.Title = "Register";
 }
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
 
-<h2>@ViewBag.Title.</h2>
+<section class="login-block">
+    <div class="container container-login">
+        <div class="row">
+            <div class="col-md-4 login-sec">
+                <h2 class="text-center">Register Now</h2>
+                @using (Html.BeginForm("Register", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "login-form", role = "form" }))
+                {
+                    @Html.AntiForgeryToken()
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
-@using (Html.BeginForm("Register", "Account", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
-{
-    @Html.AntiForgeryToken()
-    <h4>Create a new account.</h4>
-    <hr />
-    @Html.ValidationSummary("", new { @class = "text-danger" })
-    <div class="form-group">
-        @Html.LabelFor(m => m.Type, new { @class = "col-md-2 control-label" })
-        <div class="col-md-10">
-            @Html.DropDownListFor(model => model.Type, new SelectList(Enum.GetValues(typeof(LocationDeVoitures.Models.Constants))),
-            "Sélectionnez le type de compte", new { @class = "form-control" })
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.Type, new { @class = "text-uppercase" })
+                        @Html.DropDownListFor(model => model.Type, new SelectList(Enum.GetValues(typeof(LocationDeVoitures.Models.Constants))),
+                            "Sélectionnez le type de compte", new { @class = "form-control" })
+                        @Html.ValidationMessageFor(m => m.Type, "", new { @class = "text-danger" })
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.UserName, new { @class = "text-uppercase " })
+                        @Html.TextBoxFor(m => m.UserName, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(m => m.UserName, "", new { @class = "text-danger" })
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.Email, new { @class = "text-uppercase " })
+                        @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.Password, new { @class = "text-uppercase " })
+                        @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.ConfirmPassword, new { @class = "text-uppercase " })
+                        @Html.TextBoxFor(m => m.ConfirmPassword, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(m => m.ConfirmPassword, "", new { @class = "text-danger" })
+                    </div>
+                    <button type="submit" class="btn btn btn-primary w-100 btn-login float-right">Register</button>
+                }
+            </div>
+            <div class="col-md-8 p-0 banner-sec">
+                <div id="carouselExampleIndicators"  class="carousel slide" data-ride="carousel">
+                    <ol class="carousel-indicators">
+                        <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+                        <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+                        <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+                    </ol>
+                    <div class="carousel-inner" role="listbox">
+                        <div class="carousel-item active" >
+                            <img class="d-block w-100" height="640"  src="https://static.pexels.com/photos/33972/pexels-photo.jpg" alt="First slide">
+                        </div>
+                        <div class="carousel-item">
+                            <img class="d-block w-100"  height="640"  src="https://images.pexels.com/photos/7097/people-coffee-tea-meeting.jpg" alt="First slide">
+                        </div>
+                        <div class="carousel-item">
+                            <img class="d-block w-100" height="640"   src="https://images.pexels.com/photos/872957/pexels-photo-872957.jpeg" alt="First slide">
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
-    <div class="form-group">
-        @Html.LabelFor(m => m.UserName, new { @class = "col-md-2 control-label" })
-        <div class="col-md-10">
-            @Html.TextBoxFor(m => m.UserName, new { @class = "form-control" })
-        </div>
-    </div>
-    <div class="form-group">
-        @Html.LabelFor(m => m.Email, new { @class = "col-md-2 control-label" })
-        <div class="col-md-10">
-            @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
-        </div>
-    </div>
-    <div class="form-group">
-        @Html.LabelFor(m => m.Password, new { @class = "col-md-2 control-label" })
-        <div class="col-md-10">
-            @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
-        </div>
-    </div>
-    <div class="form-group">
-        @Html.LabelFor(m => m.ConfirmPassword, new { @class = "col-md-2 control-label" })
-        <div class="col-md-10">
-            @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control" })
-        </div>
-    </div>
-    <div class="form-group">
-        <div class="col-md-offset-2 col-md-10">
-            <input type="submit" class="btn btn-default" value="Register" />
-        </div>
-    </div>
-}
+</section>

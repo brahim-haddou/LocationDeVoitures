@@ -2,76 +2,74 @@
 @{
     ViewBag.Title = "Create";
 }
+<div style="text-align: -webkit-center;">
+    <div class="col-md-10 login-sec container-login">
+        <h2>Create Voiture</h2>
 
-<h2>Index</h2>
+        @using (Html.BeginForm("Create", "Voitures", FormMethod.Post, new { role = "form", enctype = "multipart/form-data" }))
+        {
+            @Html.AntiForgeryToken()
+            @Html.ValidationSummary("", new { @class = "text-danger" })
 
+            <div class="form-row">
+                <div class="form-group col-md-4">
+                    @Html.LabelFor(m => m.Matricule, new { @class = "text-uppercase float-left" })
+                    @Html.TextBoxFor(m => m.Matricule, new { @class = "form-control", placeholder = "Matricule" })
+                    @Html.ValidationMessageFor(m => m.Matricule, "", new { @class = "text-danger" })
+                </div>
+                <div class="form-group col-md-4">
+                    @Html.LabelFor(m => m.Prix, new { @class = "text-uppercase float-left" })
+                    @Html.TextBoxFor(m => m.Prix, new { @class = "form-control", placeholder = "Prix" })
+                    @Html.ValidationMessageFor(m => m.Prix, "", new { @class = "text-danger" })
+                </div>
+                <div class="form-group col-md-4">
+                    @Html.LabelFor(m => m.Module, new { @class = "text-uppercase float-left" })
+                    @Html.TextBoxFor(m => m.Module, new { @class = "form-control", placeholder = "Module" })
+                    @Html.ValidationMessageFor(m => m.Module, "", new { @class = "text-danger" })
+                </div>
+            </div>
 
-@using (Html.BeginForm("Create", "Voitures", FormMethod.Post, new { @class = "form-horizontal", role = "form", enctype = "multipart/form-data" }))
-{
-    @Html.AntiForgeryToken()
-    <h4>Create a new account.</h4>
-    <hr />
-    @Html.ValidationSummary("", new { @class = "text-danger" })
-    <div class="form-group">
-        @Html.LabelFor(m => m.Matricule, new { @class = "col-md-2 control-label" })
-        <div class="col-md-10">
-            @Html.TextBoxFor(m => m.Matricule, new { @class = "form-control" })
-        </div>
-    </div>
-    <div class="form-group">
-        @Html.LabelFor(m => m.Prix, new { @class = "col-md-2 control-label" })
-        <div class="col-md-10">
-            @Html.TextBoxFor(m => m.Prix, new { @class = "form-control" })
-        </div>
-    </div>
-    <div class="form-group">
-        @Html.LabelFor(m => m.Module, new { @class = "col-md-2 control-label" })
-        <div class="col-md-10">
-            @Html.TextBoxFor(m => m.Module, new { @class = "form-control" })
-        </div>
-    </div>
-    <div class="form-group">
-        @Html.LabelFor(m => m.Marque, new { @class = "col-md-2 control-label" })
-        <div class="col-md-10">
-            @Html.TextBoxFor(m => m.Marque, new { @class = "form-control" })
-        </div>
-    </div>
-    <div class="form-group">
-        @Html.LabelFor(m => m.Km, new { @class = "col-md-2 control-label" })
-        <div class="col-md-10">
-            @Html.TextBoxFor(m => m.Km, new { @class = "form-control" })
-        </div>
-    </div>
-    <div class="form-group">
-        @Html.LabelFor(m => m.Couleur, new { @class = "col-md-2 control-label" })
-        <div class="col-md-10">
-            @Html.TextBoxFor(m => m.Couleur, new { @class = "form-control" })
-        </div>
-    </div>
-    <div class="form-group">
-        @Html.LabelFor(m => m.Description, new { @class = "col-md-2 control-label" })
-        <div class="col-md-10">
-            @Html.TextBoxFor(m => m.Description, new { @class = "form-control" })
-        </div>
-    </div>
-    <div class="form-group">
-        <label class="col-md-2 control-label">Default file input example</label>
-        <div class="col-md-10">
-            <input class="form-control" type="file" name="imageP">
-        </div>
-    </div>
-    <div class="form-group">
-        <label class="col-md-2 control-label">Default file input example</label>
-        <div class="col-md-10">
-            <input class="form-control" type="file" name="imageS" multiple>
-        </div>
-    </div>
+            <div class="form-row">
+                <div class="form-group col-md-4">
+                    @Html.LabelFor(m => m.Marque, new { @class = "text-uppercase float-left" })
+                    @Html.TextBoxFor(m => m.Marque, new { @class = "form-control", placeholder = "Marque" })
+                    @Html.ValidationMessageFor(m => m.Marque, "", new { @class = "text-danger" })
+                </div>
+                <div class="form-group col-md-4">
+                    @Html.LabelFor(m => m.Km, new { @class = "text-uppercase float-left" })
+                    @Html.TextBoxFor(m => m.Km, new { @class = "form-control", placeholder = "Km" })
+                    @Html.ValidationMessageFor(m => m.Km, "", new { @class = "text-danger" })
+                </div>
+                <div class="form-group col-md-4">
+                    @Html.LabelFor(m => m.Couleur, new { @class = "text-uppercase float-left" })
+                    @Html.TextBoxFor(m => m.Couleur, new { @class = "form-control", placeholder = "Couleur" })
+                    @Html.ValidationMessageFor(m => m.Couleur, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-12">
+                    @Html.LabelFor(m => m.Description, new { @class = "text-uppercase float-left" })
+                    @Html.TextAreaFor(m => m.Description, new { @class = "form-control w-100"})
+                    @Html.ValidationMessageFor(m => m.Description, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <div class="custom-file">
+                        <input type="file" class="custom-file-input" name="imageP" id="imageP" required>
+                        <label class="custom-file-label" for="imageP">L'Image principale.</label>
+                    </div>
+                </div>
+                <div class="form-group col-md-6">
+                    <div class="custom-file">
+                        <input type="file" class="custom-file-input" name="imageS" id="imageS" required multiple>
+                        <label class="custom-file-label" for="imageS">L'Image secondaires</label>
+                    </div>
+                </div>
+            </div>
 
+            <button type="submit" class="btn btn btn-primary w-100 btn-login float-right">Create</button>
+        }
 
-
-    <div class="form-group">
-        <div class="col-md-offset-2 col-md-10">
-            <input type="submit" class="btn btn-default" value="Register" />
-        </div>
     </div>
-}
+</div>

@@ -2,62 +2,54 @@
 @{
     ViewBag.Title = "Administrateur";
 }
+<div style="text-align: -webkit-center;">
+    <div class="col-md-6 login-sec container-login">
+        <h2>Edit Administrateur</h2>
+        @using (Html.BeginForm(new { @class = "login-form", role = "form" }))
+        {
+            @Html.AntiForgeryToken()
+            @Html.ValidationSummary("", new { @class = "text-danger" })
+            @Html.HiddenFor(model => model.AdministrateurID)
+            @Html.HiddenFor(model => model.UserID)
 
-<h2>Administrateur</h2>
+            <div class="form-group">
+                @Html.LabelFor(m => m.Nom, new { @class = "text-uppercase float-left" })
+                @Html.TextBoxFor(m => m.Nom, new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.Nom, "", new { @class = "text-danger" })
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(m => m.Prenom, new { @class = "text-uppercase float-left" })
+                @Html.TextBoxFor(m => m.Prenom, new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.Prenom, "", new { @class = "text-danger" })
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(m => m.CIN, new { @class = "text-uppercase float-left" })
+                @Html.TextBoxFor(m => m.CIN, new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.CIN, "", new { @class = "text-danger" })
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(m => m.Address, new { @class = "text-uppercase float-left" })
+                @Html.TextBoxFor(m => m.Address, new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.Address, "", new { @class = "text-danger" })
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(m => m.Ville, new { @class = "text-uppercase float-left" })
+                @Html.TextBoxFor(m => m.Ville, new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.Ville, "", new { @class = "text-danger" })
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(m => m.Tel, new { @class = "text-uppercase float-left" })
+                @Html.TextBoxFor(m => m.Tel, new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.Tel, "", new { @class = "text-danger" })
+            </div>
 
-<h2>Edit</h2>
-@using (Html.BeginForm(new { @class = "form-horizontal", role = "form" }))
-{
-    @Html.AntiForgeryToken()
-    <h4>Create a new Profile.</h4>
-    <hr />
-    @Html.ValidationSummary("", new { @class = "text-danger" })
-    @Html.HiddenFor(model => model.AdministrateurID)
-    @Html.HiddenFor(model => model.UserID)
-    <div class="form-group">
-        @Html.LabelFor(m => m.Nom, new { @class = "col-md-2 control-label" })
-        <div class="col-md-10">
-            @Html.TextBoxFor(m => m.Nom, new { @class = "form-control" })
-        </div>
+            <button type="submit" class="btn btn btn-primary w-100 btn-login float-right">Edit</button>
+        }
     </div>
-    <div class="form-group">
-        @Html.LabelFor(m => m.Prenom, new { @class = "col-md-2 control-label" })
-        <div class="col-md-10">
-            @Html.TextBoxFor(m => m.Prenom, new { @class = "form-control" })
-        </div>
     </div>
-    <div class="form-group">
-        @Html.LabelFor(m => m.CIN, new { @class = "col-md-2 control-label" })
-        <div class="col-md-10">
-            @Html.TextBoxFor(m => m.CIN, new { @class = "form-control" })
-        </div>
-    </div>
-    <div class="form-group">
-        @Html.LabelFor(m => m.Address, new { @class = "col-md-2 control-label" })
-        <div class="col-md-10">
-            @Html.TextBoxFor(m => m.Address, new { @class = "form-control" })
-        </div>
-    </div>
-    <div class="form-group">
-        @Html.LabelFor(m => m.Ville, new { @class = "col-md-2 control-label" })
-        <div class="col-md-10">
-            @Html.TextBoxFor(m => m.Ville, new { @class = "form-control" })
-        </div>
-    </div>
-    <div class="form-group">
-        @Html.LabelFor(m => m.Tel, new { @class = "col-md-2 control-label" })
-        <div class="col-md-10">
-            @Html.TextBoxFor(m => m.Tel, new { @class = "form-control" })
-        </div>
-    </div>
-    <div class="form-group">
-        <div class="col-md-offset-2 col-md-10">
-            <input type="submit" class="btn btn-default" value="Register" />
-        </div>
-    </div>
-}
 
-@section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
-}
+
+        @section Scripts {
+            @Scripts.Render("~/bundles/jqueryval")
+        }
 

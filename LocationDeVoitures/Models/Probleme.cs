@@ -16,7 +16,6 @@ namespace LocationDeVoitures.Models
         [Required]
         public DateTime Date { get; set; }
         public string UserPlaignantID { get; set; }
-        [Required]
         public string UserDefendeurID { get; set; }
 
         [ForeignKey("UserPlaignantID")]
