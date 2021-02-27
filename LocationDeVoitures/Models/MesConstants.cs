@@ -13,7 +13,7 @@ namespace LocationDeVoitures.Models
     }
     public enum Constants
     {
-        Administrateur, Agence, Locataire
+        Agence, Locataire
     }
     public enum ChoixDePaiement
     {

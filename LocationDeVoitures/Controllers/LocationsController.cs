@@ -17,8 +17,25 @@ namespace LocationDeVoitures.Controllers
         // GET: Locations
         public ActionResult Index()
         {
-            var locations = db.Locations.Include(l => l.LocataireLocation).Include(l => l.VoitureLocation);
-            return View(locations.ToList());
+            string user_id = db.Users.Where(x => x.UserName == System.Web.HttpContext.Current.User.Identity.Name).FirstOrDefault().Id;
+
+            if (User.IsInRole(MesConstants.RoleLocataire))
+            {
+                return View(db.Locations.Where(l => l.LocataireLocation.UserID == user_id));
+            }
+            else if (User.IsInRole(MesConstants.RoleAgence))
+            {
+                return View(db.Locations.Where(l => l.VoitureLocation.Agence.UserID == user_id));
+            }
+            else if (User.IsInRole(MesConstants.RoleAdministrateur))
+            {
+                var locations = db.Locations.Include(l => l.LocataireLocation).Include(l => l.VoitureLocation);
+                return View(locations.ToList());
+            }
+            else
+            {
+                return RedirectToAction("Index", "Home");
+            }
         }
 
         // GET: Locations/Details/5

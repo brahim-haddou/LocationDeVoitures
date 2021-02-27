@@ -4,60 +4,62 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.LocataireLocation.Nom)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.VoitureLocation.Matricule)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Data)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Duree)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.ChoiseDePayment)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Status)
-        </th>
-        <th></th>
-    </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.LocataireLocation.Nom)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.VoitureLocation.Matricule)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Data)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Duree)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ChoiseDePayment)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Status)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.LocationID }) |
-            @Html.ActionLink("Details", "Details", new { id=item.LocationID }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.LocationID })
-        </td>
-    </tr>
-}
+<div style="text-align: -webkit-center;">
+    <div class="col-md-10 login-sec container-login">
+        <h2>Location</h2>
+        <table class="table">
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.LocataireLocation.Nom)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.VoitureLocation.Matricule)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Data)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Duree)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.ChoiseDePayment)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Status)
+                </th>
+                <th></th>
+            </tr>
 
-</table>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.LocataireLocation.Nom)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.VoitureLocation.Matricule)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Data)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Duree)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ChoiseDePayment)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Status)
+                    </td>
+                    <td>
+                        @Html.ActionLink("Details", "Details", new { id = item.LocationID })
+                    </td>
+                </tr>
+            }
+
+        </table>
+        </div>
+        </div>
+
