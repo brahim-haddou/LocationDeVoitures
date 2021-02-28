@@ -5,7 +5,7 @@
 }
 <div style="text-align: -webkit-center;">
     <div class="col-md-7 login-sec container-login">
-        <h2>Create Offre</h2>
+        <h2>Créer Un Offre</h2>
 
         @using (Html.BeginForm(new { Id_Voiture = ViewBag.Id_Voiture }))
         {
@@ -29,7 +29,7 @@
                 @Html.ValidationMessageFor(m => m.Duree, "", new { @class = "text-danger" })
             </div>
 
-            <button type="submit" class="btn btn btn-primary w-100 btn-login float-right">Create</button>
+            <button type="submit" class="btn btn btn-primary w-100 btn-login float-right">submit</button>
         }
     </div>
 </div>

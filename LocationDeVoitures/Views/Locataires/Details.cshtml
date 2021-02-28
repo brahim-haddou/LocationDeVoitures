@@ -12,13 +12,13 @@
         <div class="w-100">
             @if (User.IsInRole(MesConstants.RoleAdministrateur) || User.IsInRole(MesConstants.RoleAgence))
             {
-                @Html.ActionLink("Add to List favoris", "Add", "ListFavoris", new { UserFavorisID = Model.UserID }, new { @class = "btn btn-success m-2 my-2 my-sm-0 float-right" })
-                @Html.ActionLink("Add to List Noire", "Add", "ListNoire", new { UserNoireID = Model.UserID }, new { @class = "btn btn-success m-2 my-2 my-sm-0 float-right" })
+                @Html.ActionLink("Ajouter à la liste favoris", "Add", "ListFavoris", new { UserFavorisID = Model.UserID }, new { @class = "btn btn-success m-2 my-2 my-sm-0 float-right" })
+                @Html.ActionLink("Ajouter à la liste Noire", "Add", "ListNoire", new { UserNoireID = Model.UserID }, new { @class = "btn btn-success m-2 my-2 my-sm-0 float-right" })
             }
             @if (User.IsInRole(MesConstants.RoleAgence))
             {
 
-                @Html.ActionLink("Add a problem", "Create", "Problemes", new { id = Model.UserID }, new { @class = "btn btn-success m-2 my-2 my-sm-0 float-right" })
+                @Html.ActionLink("Annoncer un problème", "Create", "Problemes", new { id = Model.UserID }, new { @class = "btn btn-success m-2 my-2 my-sm-0 float-right" })
             }
         </div>
         <table class="table">

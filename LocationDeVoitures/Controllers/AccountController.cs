@@ -163,14 +163,14 @@ namespace LocationDeVoitures.Controllers
                         UserManager.AddToRole(user.Id, model.Type);
                         await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
 
-                        return RedirectToAction("Agence", "Profile");
+                        return RedirectToAction("Create", "Agences");
                     }
                     else if (MesConstants.RoleLocataire == model.Type)
                     {
                         UserManager.AddToRole(user.Id, model.Type);
                         await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
 
-                        return RedirectToAction("Locataire", "Profile");
+                        return RedirectToAction("Create", "Locataires");
                     }
                     // For more information on how to enable account confirmation and password reset please visit https://go.microsoft.com/fwlink/?LinkID=320771
                     // Send an email with this link

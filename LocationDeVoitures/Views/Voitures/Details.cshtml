@@ -11,16 +11,16 @@
             <div class="w-100">
                 @if (User.IsInRole(MesConstants.RoleLocataire))
                 {
-                    @Html.ActionLink("Location", "Create", "Locations", new { id = Model.VoitureList[0].VoitureID }, new { @class = "btn btn-success my-2 my-sm-0  m-2 float-right" })
+                    @Html.ActionLink("ajouter une demande", "Create", "Locations", new { id = Model.VoitureList[0].VoitureID }, new { @class = "btn btn-success my-2 my-sm-0  m-2 float-right" })
                 }
                 @if (User.IsInRole(MesConstants.RoleAdministrateur))
                 {
-                    @Html.ActionLink("delete", "Create", "Offres", new { id = Model.VoitureList[0].VoitureID }, new { @class = "btn btn-success my-2 my-sm-0  m-2 float-right" })
+                    @Html.ActionLink("supprimer", "Create", "Offres", new { id = Model.VoitureList[0].VoitureID }, new { @class = "btn btn-success my-2 my-sm-0  m-2 float-right" })
                 }
                 @if (User.IsInRole(MesConstants.RoleAgence) && ViewBag.BOOL)
                 {
-                    @Html.ActionLink("delete", "Create", "Offres", new { id = Model.VoitureList[0].VoitureID }, new { @class = "btn btn-success my-2 my-sm-0  m-2 float-right" })
-                    @Html.ActionLink("Add Offers", "Create", "Offres", new { id = Model.VoitureList[0].VoitureID }, new { @class = "btn btn-success my-2 my-sm-0  m-2 float-right" })
+                    @Html.ActionLink("supprimer", "Create", "Offres", new { id = Model.VoitureList[0].VoitureID }, new { @class = "btn btn-success my-2 my-sm-0  m-2 float-right" })
+                    @Html.ActionLink("Ajouter un offre", "Create", "Offres", new { id = Model.VoitureList[0].VoitureID }, new { @class = "btn btn-success my-2 my-sm-0  m-2 float-right" })
                     @Html.ActionLink("Edit", "Edit", "Voitures", new { id = Model.VoitureList[0].VoitureID }, new { @class = "btn btn-success my-2 my-sm-0  m-2 float-right" })
                 }
             </div>
@@ -178,7 +178,7 @@
                     <thead>
                         <tr>
                             <th scope="col">Pourcentage</th>
-                            <th scope="col">Start Date</th>
+                            <th scope="col">Date de début</th>
                             <th scope="col">Duree</th>
                         </tr>
                     </thead>

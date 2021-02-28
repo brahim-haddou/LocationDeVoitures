@@ -7,6 +7,7 @@ using System.Web.Mvc;
 
 namespace LocationDeVoitures.Controllers
 {
+    [Authorize]
     public class ListFavorisController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();

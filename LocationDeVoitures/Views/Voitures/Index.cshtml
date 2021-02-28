@@ -8,9 +8,9 @@
     <div class="col-md-12 login-sec container-login">
         <div>
             <div class="vouture-list-top mr-2">
-                <H3 class="float-left">List Des Voiture</H3>
+                <H2 class="">Liste Des Voitures</H2>
 
-                @using (Html.BeginForm("Index", "Voitures", FormMethod.Post, new { @class = "form-inline", role = "form" }))
+                @using (Html.BeginForm("Index", "Voitures", FormMethod.Post, new { @class = "form-inline w-75", role = "form" }))
                 {
                     <input class="form-control mr-sm-2" type="text" name="Search" placeholder="Search" aria-label="Search">
                     @Html.DropDownList("opt", new SelectList(Enum.GetValues(typeof(LocationDeVoitures.Models.Search))),

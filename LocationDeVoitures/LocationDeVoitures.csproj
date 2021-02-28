@@ -186,7 +186,6 @@
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\OffresController.cs" />
     <Compile Include="Controllers\ProblemesController.cs" />
-    <Compile Include="Controllers\ProfileController.cs" />
     <Compile Include="Controllers\VoituresController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -374,9 +373,6 @@
     <Content Include="Views\Manage\VerifyPhoneNumber.cshtml" />
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
-    <Content Include="Views\Profile\Administrateur.cshtml" />
-    <Content Include="Views\Profile\Agence.cshtml" />
-    <Content Include="Views\Profile\Locataire.cshtml" />
     <Content Include="Views\Manage\Dashboard.cshtml" />
     <Content Include="Views\Manage\List.cshtml" />
     <Content Include="Views\Voitures\Create.cshtml" />

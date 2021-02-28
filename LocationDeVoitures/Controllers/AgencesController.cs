@@ -9,6 +9,7 @@ using System.Web.Mvc;
 
 namespace LocationDeVoitures.Controllers
 {
+    [Authorize]
     public class AgencesController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
@@ -83,6 +84,7 @@ namespace LocationDeVoitures.Controllers
 
 
         // GET: Offres/Delete/5
+        [Authorize(Roles = MesConstants.RoleAdministrateur)]
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -99,6 +101,7 @@ namespace LocationDeVoitures.Controllers
 
         // POST: Offres/Delete/5
         [HttpPost, ActionName("Delete")]
+        [Authorize(Roles = MesConstants.RoleAdministrateur)]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {

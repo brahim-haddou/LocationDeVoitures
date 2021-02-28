@@ -9,6 +9,7 @@ using System.Web.Mvc;
 
 namespace LocationDeVoitures.Controllers
 {
+    [Authorize(Roles = MesConstants.RoleAdministrateur)]
     public class AdministrateursController : Controller
     {
 
@@ -71,7 +72,7 @@ namespace LocationDeVoitures.Controllers
             {
                 db.Entry(administrateur).State = EntityState.Modified;
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Index", "Home");
             }
             return View(administrateur);
         }

@@ -10,11 +10,13 @@ using LocationDeVoitures.Models;
 
 namespace LocationDeVoitures.Controllers
 {
+    [Authorize]
     public class OffresController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
 
         // GET: Offres
+        [Authorize(Roles = MesConstants.RoleAgence + "," + MesConstants.RoleAdministrateur)]
         public ActionResult Index()
         {
             var offres = db.Offres.Include(o => o.VoitureOffre);
@@ -37,6 +39,7 @@ namespace LocationDeVoitures.Controllers
         }
 
         // GET: Offres/Create
+        [Authorize(Roles = MesConstants.RoleAgence)]
         public ActionResult Create(int id)
         {
             ViewBag.Id_Voiture = id;
@@ -48,6 +51,7 @@ namespace LocationDeVoitures.Controllers
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
+        [Authorize(Roles = MesConstants.RoleAgence)]
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "OffreID,Pourcentage,Data,Duree,VoitureID")] Offre offre, int Id_Voiture)
         {
@@ -56,7 +60,7 @@ namespace LocationDeVoitures.Controllers
             {
                 db.Offres.Add(offre);
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Index", "Home");
             }
 
             ViewBag.VoitureID = new SelectList(db.Voitures, "VoitureID", "Matricule", offre.VoitureID);
@@ -64,6 +68,7 @@ namespace LocationDeVoitures.Controllers
         }
 
         // GET: Offres/Edit/5
+        [Authorize(Roles = MesConstants.RoleAgence)]
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -83,6 +88,7 @@ namespace LocationDeVoitures.Controllers
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
+        [Authorize(Roles = MesConstants.RoleAgence)]
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "OffreID,Pourcentage,Data,Duree,VoitureID")] Offre offre)
         {
@@ -90,13 +96,14 @@ namespace LocationDeVoitures.Controllers
             {
                 db.Entry(offre).State = EntityState.Modified;
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Index", "Home");
             }
             ViewBag.VoitureID = new SelectList(db.Voitures, "VoitureID", "Matricule", offre.VoitureID);
             return View(offre);
         }
 
         // GET: Offres/Delete/5
+        [Authorize(Roles = MesConstants.RoleAgence + "," + MesConstants.RoleAdministrateur)]
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -114,12 +121,13 @@ namespace LocationDeVoitures.Controllers
         // POST: Offres/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = MesConstants.RoleAgence + "," + MesConstants.RoleAdministrateur)]
         public ActionResult DeleteConfirmed(int id)
         {
             Offre offre = db.Offres.Find(id);
             db.Offres.Remove(offre);
             db.SaveChanges();
-            return RedirectToAction("Index");
+            return RedirectToAction("Index", "Home");
         }
 
         protected override void Dispose(bool disposing)

@@ -18,15 +18,16 @@ namespace LocationDeVoitures.Controllers
         private ApplicationUserManager _userManager;
         private ApplicationDbContext db = new ApplicationDbContext();
 
+        [Authorize(Roles = MesConstants.RoleAdministrateur)]
         public ActionResult MyChartAdmin()
         {
 
 
-            string[] XValues = new string[] { "Agences", "Locataires", "Voitures", "Locations" };
+            string[] XValues = new string[] { "Agences", "Locataires", "Voitures", "demandes" };
             int[] YValues = new int[]{ db.Agences.Count(), db.Locataires.Count(), db.Voitures.Count(), db.Locations.Count()};
 
             new System.Web.Helpers.Chart(width: 800, height: 400)
-                .AddTitle("Nombre des etudiants par filiere")
+                .AddTitle("statistique ")
                 .AddSeries(
                 chartType: "Column",
                 xValue: XValues,
@@ -34,13 +35,14 @@ namespace LocationDeVoitures.Controllers
                 ).Write("png");
             return null;
         }
-        
+
+        [Authorize(Roles = MesConstants.RoleAgence)]
         public ActionResult MyChartAgence()
         {
             string user_id = db.Users.Where(x => x.UserName == System.Web.HttpContext.Current.User.Identity.Name).FirstOrDefault().Id;
             var ag_id = db.Agences.Where(x => x.UserID == user_id).FirstOrDefault().AgenceID;
             var My = db.Voitures.Where(V => V.AgenceID == ag_id);
-            string[] XValues = new string[] { "Voitures", "Voutures  used", "Location" };
+            string[] XValues = new string[] { "Voiture", "voiture utilisé", "demande" };
             int[] YValues = new int[] {
                 My.Count(),
                 db.Locations.Where(l => !My.Select(v => v.VoitureID).Contains(l.VoitureID)).Count(),
@@ -48,7 +50,7 @@ namespace LocationDeVoitures.Controllers
             };
 
             new System.Web.Helpers.Chart(width: 800, height: 400)
-                .AddTitle("Nombre des etudiants par filiere")
+                .AddTitle("statistique ")
                 .AddSeries(
                 chartType: "Column",
                 xValue: XValues,
@@ -56,11 +58,12 @@ namespace LocationDeVoitures.Controllers
                 ).Write("png");
             return null;
         }
+        [Authorize(Roles = MesConstants.RoleLocataire)]
         public ActionResult MyChartLocataire()
         {
             string user_id = db.Users.Where(x => x.UserName == System.Web.HttpContext.Current.User.Identity.Name).FirstOrDefault().Id;
             var lo_id = db.Locataires.Where(x => x.UserID == user_id).FirstOrDefault().LocataireID;
-            string[] XValues = new string[] { "Voitures", "Voutures  used", "Voitures unused"};
+            string[] XValues = new string[] { "Voiture", "voiture utilisé", "voiture n'ai pas utilisé" };
             int[] YValues = new int[] {
                 db.Voitures.Count(),
                 db.Locations.Where(l => l.LocataireID == lo_id && l.Status).Count(),
@@ -68,7 +71,7 @@ namespace LocationDeVoitures.Controllers
             };
 
             new System.Web.Helpers.Chart(width: 800, height: 400)
-                .AddTitle("Nombre des etudiants par filiere")
+                .AddTitle("statistique ")
                 .AddSeries(
                 chartType: "Column",
                 xValue: XValues,

@@ -12,12 +12,14 @@ namespace LocationDeVoitures.Controllers
     {
         private ApplicationDbContext db = new ApplicationDbContext();
         // GET: Problemes
+        [Authorize(Roles = MesConstants.RoleAdministrateur)]
         public ActionResult Index()
         {
             return View(db.Problemes.ToList());
         }
 
 
+        [Authorize(Roles = MesConstants.RoleAgence + "," + MesConstants.RoleLocataire)]
         public ActionResult Create(string id)
         {
             if (id == null)
@@ -28,6 +30,7 @@ namespace LocationDeVoitures.Controllers
             return View();
         }
         [HttpPost]
+        [Authorize(Roles = MesConstants.RoleAgence + "," + MesConstants.RoleLocataire)]
         public ActionResult Create(Probleme probleme, string id)
         {
             var user_id = db.Users.Where(x => x.UserName == System.Web.HttpContext.Current.User.Identity.Name).FirstOrDefault().Id;
@@ -42,6 +45,7 @@ namespace LocationDeVoitures.Controllers
             }
             return View();
         }
+        [Authorize(Roles = MesConstants.RoleAdministrateur)]
         public ActionResult UserDetails(string id)
         {
             if (id == null)

@@ -7,16 +7,16 @@
 
     <ul class="nav navbar-nav float-right">
         <li>
-            @Html.ActionLink("Hello " + User.Identity.GetUserName() + "!", "Dashboard", "Manage", routeValues: null, htmlAttributes: new { title = "Manage", @class = " text-light" })
+            @Html.ActionLink("Bonjour " + User.Identity.GetUserName() + "!", "Dashboard", "Manage", routeValues: null, htmlAttributes: new { title = "Manage", @class = " text-light" })
         </li>
-        <li><a href="javascript:document.getElementById('logoutForm').submit()" class="text-light">Log off</a></li>
+        <li><a href="javascript:document.getElementById('logoutForm').submit()" class="text-light">Se déconnecter</a></li>
     </ul>
     }
 }
 else
 {
     <ul class="nav navbar-nav float-right">
-        <li>@Html.ActionLink("Register", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink", @class = " text-light" })</li>
-        <li>@Html.ActionLink("Log in", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink", @class = " text-light" })</li>
+        <li>@Html.ActionLink("S'inscrire", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink", @class = " text-light" })</li>
+        <li>@Html.ActionLink("se connecter", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink", @class = " text-light" })</li>
     </ul>
 }

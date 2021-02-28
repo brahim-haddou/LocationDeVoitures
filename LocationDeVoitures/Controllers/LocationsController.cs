@@ -10,6 +10,7 @@ using LocationDeVoitures.Models;
 
 namespace LocationDeVoitures.Controllers
 {
+    [Authorize()]
     public class LocationsController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
@@ -54,6 +55,7 @@ namespace LocationDeVoitures.Controllers
             return View(location);
         }
 
+        [Authorize(Roles = MesConstants.RoleLocataire)]
         public ActionResult Create(int? id)
         {
             if (id == null)
@@ -68,6 +70,7 @@ namespace LocationDeVoitures.Controllers
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
+        [Authorize(Roles = MesConstants.RoleLocataire)]
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "LocationID,VoitureID,LocataireID,Data,Duree,ChoiseDePayment,Status")] Location location, int Id_Voiture)
         {
@@ -89,6 +92,7 @@ namespace LocationDeVoitures.Controllers
         }
 
         // GET: Locations/Edit/5
+        [Authorize(Roles = MesConstants.RoleLocataire+","+ MesConstants.RoleAgence)]
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -111,6 +115,7 @@ namespace LocationDeVoitures.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = MesConstants.RoleLocataire + "," + MesConstants.RoleAgence)]
         public ActionResult Edit([Bind(Include = "LocationID,VoitureID,LocataireID,Data,Duree,ChoiseDePayment,Status")] Location location)
         {
             if (User.IsInRole(MesConstants.RoleLocataire))
@@ -121,13 +126,14 @@ namespace LocationDeVoitures.Controllers
             {
                 db.Entry(location).State = EntityState.Modified;
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Index", "Home");
             }
             ViewBag.LocataireID = new SelectList(db.Locataires, "LocataireID", "Nom", location.LocataireID);
             ViewBag.VoitureID = new SelectList(db.Voitures, "VoitureID", "Matricule", location.VoitureID);
             return View(location);
         }
 
+        [Authorize(Roles = MesConstants.RoleLocataire)]
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -145,12 +151,13 @@ namespace LocationDeVoitures.Controllers
         // POST: Locations/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = MesConstants.RoleLocataire)]
         public ActionResult DeleteConfirmed(int id)
         {
             Location location = db.Locations.Find(id);
             db.Locations.Remove(location);
             db.SaveChanges();
-            return RedirectToAction("Index");
+            return RedirectToAction("Index", "Home");
         }
 
         protected override void Dispose(bool disposing)

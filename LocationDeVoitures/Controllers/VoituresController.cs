@@ -45,13 +45,14 @@ namespace LocationDeVoitures.Controllers
             return View(db.Voitures.ToList());
         }
 
-
+        [Authorize(Roles = MesConstants.RoleAgence)]
         public ActionResult Create()
         {
             return View();
         }
 
         [HttpPost]
+        [Authorize(Roles = MesConstants.RoleAgence)]
         public ActionResult Create(Voiture voiture, HttpPostedFileBase imageP, IEnumerable<HttpPostedFileBase> imageS)
         {
 
@@ -87,13 +88,11 @@ namespace LocationDeVoitures.Controllers
                 db.SaveChanges();
             }
 
-            return View();
+            return RedirectToAction("Index");
         }
 
         public ActionResult Details(int? id)
         {
-
-
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -132,6 +131,7 @@ namespace LocationDeVoitures.Controllers
         }
 
 
+        [Authorize(Roles = MesConstants.RoleAgence)]
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -148,6 +148,7 @@ namespace LocationDeVoitures.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = MesConstants.RoleAgence)]
         [ValidateAntiForgeryToken]
         public ActionResult Edit(Voiture voiture, HttpPostedFileBase imageP, IEnumerable<HttpPostedFileBase> imageS)
         {
@@ -173,7 +174,7 @@ namespace LocationDeVoitures.Controllers
                         voiture.Image = bytesP;
                     }
                 }
-                if (imageS != null)
+                if (imageS.ToArray()[0] != null)
                 {
                     List<ImagesVoiture> vs = db.ImagesVoitures.Where(i => i.VoitureID == voiture.VoitureID).ToList();
                     foreach(var e in vs)
@@ -214,6 +215,7 @@ namespace LocationDeVoitures.Controllers
             return View(voiture);
         }
 
+        [Authorize(Roles = MesConstants.RoleAgence+","+MesConstants.RoleAdministrateur)]
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -225,16 +227,10 @@ namespace LocationDeVoitures.Controllers
             {
                 return HttpNotFound();
             }
-            return View(vol);
-        }
-
-        [HttpPost, ActionName("Delete")]
-        public ActionResult DeleteConfirmed(int id)
-        {
-            Voiture vol = db.Voitures.Find(id);
             db.Voitures.Remove(vol);
             db.SaveChanges();
             return RedirectToAction("Index");
         }
+
     }
 }
